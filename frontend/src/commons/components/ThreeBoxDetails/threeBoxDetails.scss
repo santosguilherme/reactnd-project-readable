@@ -1,0 +1,19 @@
+.three-box-details {
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  &__box {
+    flex-grow: 1;
+
+    &:first-child {
+      border-right: 1px solid #cccccc;
+    }
+
+    &:last-child {
+      border-left: 1px solid #cccccc;
+    }
+  }
+}

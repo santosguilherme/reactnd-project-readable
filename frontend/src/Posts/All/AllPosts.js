@@ -21,11 +21,11 @@ import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown';
 
 import Truncate from 'react-truncate';
 
-import {actions as postsActions, selectors as postsSelectors} from '../redux/modules/posts';
+import {actions as postsActions, selectors as postsSelectors} from '../../redux/modules/posts';
 
-import AppBar from '../App/AppBar'
-import PostPropType from './PostPropType';
-
+import AppBar from '../../App/AppBar'
+import PostPropType from '../PostPropType';
+import ThreeBoxDetails from '../../commons/components/ThreeBoxDetails/ThreeBoxDetails';
 
 import './allPosts.css';
 
@@ -51,24 +51,16 @@ const styles = theme => ({
         paddingTop: '0',
         paddingBottom: '0'
     },
-    threeChildren: {
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center'
-    },
     threeChildrenItem: {
-        flexGrow: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
-    },
-    threeChildrenMiddle: {}
+    }
 });
 
 class AllPosts extends Component {
     componentDidMount() {
         const {getAllPosts} = this.props;
-
         getAllPosts();
     }
 
@@ -78,6 +70,68 @@ class AllPosts extends Component {
 
         history.push(`${category}/posts/${id}`);
     };
+
+    renderPostTimestamp(post) {
+        const {classes} = this.props;
+
+        return (
+            <div className={classes.threeChildrenItem}>
+                <Typography component="span" align="center">
+                    <FormattedDate
+                        value={new Date(post.timestamp)}
+                        day='2-digit'
+                    />
+                </Typography>
+                <Typography
+                    component="span"
+                    align="center"
+                    type="caption"
+                    className="text-uppercase"
+                >
+                    <FormattedDate
+                        value={new Date(post.timestamp)}
+                        month='short'
+                    />
+                </Typography>
+            </div>
+        );
+    }
+
+    renderPostVoteScore(post) {
+        const {classes} = this.props;
+
+        return (
+            <div className={classes.threeChildrenItem}>
+                <IconButton className="">
+                    <KeyboardArrowUp/>
+                </IconButton>
+                <Typography component="span" align="center">
+                    {post.voteScore}
+                </Typography>
+                <Typography component="span" align="center" type="caption">
+                    VOTES
+                </Typography>
+                <IconButton className="">
+                    <KeyboardArrowDown/>
+                </IconButton>
+            </div>
+        );
+    }
+
+    renderPostommentCount(post) {
+        const {classes} = this.props;
+
+        return (
+            <div className={classes.threeChildrenItem}>
+                <Typography component="span" align="center">
+                    {post.commentCount}
+                </Typography>
+                <Typography component="span" align="center" type="caption">
+                    COMMENTS
+                </Typography>
+            </div>
+        );
+    }
 
     render() {
         const {classes, posts} = this.props;
@@ -108,18 +162,12 @@ class AllPosts extends Component {
                                 <Card className={classes.card}>
                                     <CardHeader
                                         title={
-                                            <Typography
-                                                type="title"
-
-                                            >
+                                            <Typography type="title">
                                                 {post.title}
                                             </Typography>
                                         }
                                         subheader={
-                                            <Typography
-                                                type="subheading"
-
-                                            >
+                                            <Typography type="subheading">
                                                 {post.author}
                                             </Typography>
                                         }
@@ -130,62 +178,19 @@ class AllPosts extends Component {
                                         }
                                     />
                                     <CardContent classes={{root: classes.cardContent}}>
-                                        <Typography component="p">
+                                        <Typography
+                                            paragraph={true}
+                                            type="body1"
+                                        >
                                             <Truncate lines={2}>
                                                 {post.body}
                                             </Truncate>
                                         </Typography>
-                                        <div className={classes.threeChildren}>
-                                            <div
-                                                className={classes.threeChildrenItem}
-                                                style={{borderRight: '1px solid #ccc'}}
-                                            >
-                                                <Typography component="span" align="center">
-                                                    <FormattedDate
-                                                        value={new Date(post.timestamp)}
-                                                        day='2-digit'
-                                                    />
-                                                </Typography>
-                                                <Typography
-                                                    component="span"
-                                                    align="center"
-                                                    type="caption"
-                                                    className="text-uppercase"
-                                                >
-                                                    <FormattedDate
-                                                        value={new Date(post.timestamp)}
-                                                        month='short'
-                                                    />
-                                                </Typography>
-                                            </div>
-                                            <div
-                                                className={`${classes.threeChildrenItem} ${classes.threeChildrenMiddle}`}
-                                            >
-                                                <IconButton className="">
-                                                    <KeyboardArrowUp/>
-                                                </IconButton>
-                                                <Typography component="span" align="center">
-                                                    {post.voteScore}
-                                                </Typography>
-                                                <Typography component="span" align="center" type="caption">
-                                                    VOTES
-                                                </Typography>
-                                                <IconButton className="">
-                                                    <KeyboardArrowDown/>
-                                                </IconButton>
-                                            </div>
-                                            <div
-                                                className={classes.threeChildrenItem}
-                                                style={{borderLeft: '1px solid #ccc'}}
-                                            >
-                                                <Typography component="span" align="center">
-                                                    {post.commentCount}
-                                                </Typography>
-                                                <Typography component="span" align="center" type="caption">
-                                                    COMMENTS
-                                                </Typography>
-                                            </div>
-                                        </div>
+                                        <ThreeBoxDetails
+                                            left={this.renderPostTimestamp(post)}
+                                            center={this.renderPostVoteScore(post)}
+                                            right={this.renderPostommentCount(post)}
+                                        />
                                     </CardContent>
                                     <CardActions>
                                         <Button
@@ -201,7 +206,11 @@ class AllPosts extends Component {
                         ))}
                     </Row>
                 </Grid>
-                <Button fab color="primary" aria-label="add" className={classes.addButton}>
+                <Button
+                    fab
+                    color="primary"
+                    className={classes.addButton}
+                >
                     <AddIcon/>
                 </Button>
             </div>

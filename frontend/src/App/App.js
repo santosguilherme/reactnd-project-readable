@@ -7,8 +7,8 @@ import {getIntlProviderConfig} from './intl';
 
 import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles';
 
-import AllPosts from '../Posts/AllPosts';
-import PostDetails from '../Posts/PostDetails';
+import AllPosts from '../Posts/All/AllPosts';
+import PostDetails from '../Posts/Details/PostDetails';
 
 //TODO: remove
 const theme = createMuiTheme({
