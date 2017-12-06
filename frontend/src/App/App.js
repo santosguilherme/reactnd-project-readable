@@ -20,7 +20,6 @@ class App extends Component {
     render() {
         const intlProviderProps = getIntlProviderConfig();
 
-
         return (
             <MuiThemeProvider theme={theme}>
                 <IntlProvider {...intlProviderProps}>

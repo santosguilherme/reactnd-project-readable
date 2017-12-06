@@ -7,3 +7,9 @@ body {
 .text-uppercase {
   text-transform: uppercase;
 }
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

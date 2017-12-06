@@ -11,12 +11,10 @@ import {Grid, Row, Col} from 'react-flexbox-grid';
 
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
 import Card, {CardHeader, CardContent, CardActions} from 'material-ui/Card';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import AddIcon from 'material-ui-icons/Add';
-import KeyboardArrowUp from 'material-ui-icons/KeyboardArrowUp';
-import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown';
+import IconButton from 'material-ui/IconButton';
 
 
 import Truncate from 'react-truncate';
@@ -26,8 +24,10 @@ import {actions as postsActions, selectors as postsSelectors} from '../../redux/
 import AppBar from '../../App/AppBar'
 import PostPropType from '../PostPropType';
 import ThreeBoxDetails from '../../commons/components/ThreeBoxDetails/ThreeBoxDetails';
+import SpinNumber from '../../commons/components/SpinNumber/SpinNumber';
 
 import './allPosts.css';
+import PostModal from '../components/PostModal';
 
 const styles = theme => ({
     addButton: {
@@ -50,15 +50,14 @@ const styles = theme => ({
     cardContent: {
         paddingTop: '0',
         paddingBottom: '0'
-    },
-    threeChildrenItem: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
     }
 });
 
 class AllPosts extends Component {
+    state = {
+        postModalOpen: false
+    };
+
     componentDidMount() {
         const {getAllPosts} = this.props;
         getAllPosts();
@@ -71,11 +70,23 @@ class AllPosts extends Component {
         history.push(`${category}/posts/${id}`);
     };
 
-    renderPostTimestamp(post) {
-        const {classes} = this.props;
+    handleSavePostModal = (post) => {
+        this.setState({postModalOpen: false});
 
+        console.log('saving post...', post);
+    };
+
+    handleCancelPostModal = () => {
+        this.setState({postModalOpen: false});
+    };
+
+    handleNewPost = () => {
+        this.setState({postModalOpen: true});
+    };
+
+    renderPostTimestamp(post) {
         return (
-            <div className={classes.threeChildrenItem}>
+            <div className="flex-column-center">
                 <Typography component="span" align="center">
                     <FormattedDate
                         value={new Date(post.timestamp)}
@@ -97,32 +108,25 @@ class AllPosts extends Component {
         );
     }
 
-    renderPostVoteScore(post) {
-        const {classes} = this.props;
+    log = type => {
+        return () => console.log(type);
+    };
 
+    renderPostVoteScore(post) {
         return (
-            <div className={classes.threeChildrenItem}>
-                <IconButton className="">
-                    <KeyboardArrowUp/>
-                </IconButton>
-                <Typography component="span" align="center">
-                    {post.voteScore}
-                </Typography>
-                <Typography component="span" align="center" type="caption">
-                    VOTES
-                </Typography>
-                <IconButton className="">
-                    <KeyboardArrowDown/>
-                </IconButton>
-            </div>
+            <SpinNumber
+                value={post.voteScore}
+                caption="SCORES"
+                onDown={this.log('down')}
+                onUp={this.log('up')}
+            />
         );
+
     }
 
     renderPostommentCount(post) {
-        const {classes} = this.props;
-
         return (
-            <div className={classes.threeChildrenItem}>
+            <div className="flex-column-center">
                 <Typography component="span" align="center">
                     {post.commentCount}
                 </Typography>
@@ -210,9 +214,15 @@ class AllPosts extends Component {
                     fab
                     color="primary"
                     className={classes.addButton}
+                    onClick={this.handleNewPost}
                 >
                     <AddIcon/>
                 </Button>
+                <PostModal
+                    open={this.state.postModalOpen}
+                    onCancel={this.handleCancelPostModal}
+                    onSavePost={this.handleSavePostModal}
+                />
             </div>
         );
     }

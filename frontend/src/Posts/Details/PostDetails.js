@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import {withRouter} from 'react-router';
 import {FormattedMessage, FormattedDate, injectIntl} from 'react-intl';
-import {withStyles} from 'material-ui/styles';
 
 
 import {Grid, Row, Col} from 'react-flexbox-grid';
@@ -13,8 +12,6 @@ import ArrowBack from 'material-ui-icons/ArrowBack';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import Person from 'material-ui-icons/Person';
 import Today from 'material-ui-icons/Today';
-import KeyboardArrowUp from 'material-ui-icons/KeyboardArrowUp';
-import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown';
 import Typography from 'material-ui/Typography';
 
 import AppBar from '../../App/AppBar';
@@ -26,14 +23,8 @@ import PostPropType from '../PostPropType';
 import ThreeBoxDetails from '../../commons/components/ThreeBoxDetails/ThreeBoxDetails';
 
 import './postDetails.css';
+import SpinNumber from '../../commons/components/SpinNumber/SpinNumber';
 
-const styles = theme => ({
-    threeChildrenItem: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-    }
-});
 
 class PostDetails extends Component {
     componentDidMount() {
@@ -51,10 +42,8 @@ class PostDetails extends Component {
     };
 
     renderPostTimestamp(post) {
-        const {classes} = this.props;
-
         return (
-            <div className={classes.threeChildrenItem}>
+            <div className="flex-column-center">
                 <Today/>
                 <Typography
                     component="span"
@@ -72,33 +61,27 @@ class PostDetails extends Component {
         );
     }
 
-    renderPostVoteScore(post) {
-        const {classes} = this.props;
+    log = type => {
+        return () => console.log(type);
+    };
 
+    renderPostVoteScore(post) {
         return (
-            <div className={classes.threeChildrenItem}>
-                <IconButton className="">
-                    <KeyboardArrowUp/>
-                </IconButton>
-                <Typography component="span" align="center">
-                    {post.voteScore}
-                </Typography>
-                <Typography component="span" align="center" type="caption">
-                    Votes
-                </Typography>
-                <IconButton className="">
-                    <KeyboardArrowDown/>
-                </IconButton>
-            </div>
+            <SpinNumber
+                value={post.voteScore}
+                caption="Scores"
+                onDown={this.log('down')}
+                onUp={this.log('up')}
+            />
         );
     }
 
     renderPostAuthor() {
-        const {classes, post} = this.props;
+        const {post} = this.props;
         const {author} = post;
 
         return (
-            <div className={classes.threeChildrenItem}>
+            <div className="flex-column-center">
                 <Person/>
                 <Typography component="span" align="center" type="caption">
                     {author}
@@ -206,6 +189,5 @@ const mapDispatchToProps = {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, mapDispatchToProps),
-    withStyles(styles)
+    connect(mapStateToProps, mapDispatchToProps)
 )(PostDetails);
