@@ -93,9 +93,18 @@ class PostDetails extends Component {
     renderPostDetails() {
         const {post} = this.props;
 
-        return (
-            <Row>
-                <Col xs={12}>
+        const colProps = {
+            xs: 12,
+            sm: 12,
+            md: 8,
+            lg: 6,
+            mdOffset: 2,
+            lgOffset: 3
+        };
+
+        return [
+            <Row key={1}>
+                <Col {...colProps}>
                     <Typography
                         type="title"
                         component="h1"
@@ -103,14 +112,18 @@ class PostDetails extends Component {
                         {post.title}
                     </Typography>
                 </Col>
-                <Col xs={12}>
+            </Row>,
+            <Row key={2}>
+                <Col {...colProps}>
                     <ThreeBoxDetails
                         left={this.renderPostAuthor()}
                         center={this.renderPostVoteScore(post)}
                         right={this.renderPostTimestamp(post)}
                     />
                 </Col>
-                <Col xs={12}>
+            </Row>,
+            <Row key={3}>
+                <Col {...colProps}>
                     <Typography
                         type="body1"
                         paragraph={true}
@@ -118,7 +131,9 @@ class PostDetails extends Component {
                         {post.body}
                     </Typography>
                 </Col>
-                <Col xs={12}>
+            </Row>,
+            <Row key={4}>
+                <Col {...colProps}>
                     <Typography
                         type="subheading"
                         component="h2"
@@ -127,7 +142,7 @@ class PostDetails extends Component {
                     </Typography>
                 </Col>
             </Row>
-        );
+        ];
     }
 
     render() {

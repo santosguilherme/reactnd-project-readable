@@ -45,7 +45,7 @@ const styles = theme => ({
     card: {
         marginTop: theme.spacing.unit,
         marginBottom: theme.spacing.unit,
-        maxWidth: 400
+        //maxWidth: 400
     },
     cardContent: {
         paddingTop: '0',
@@ -140,12 +140,19 @@ class AllPosts extends Component {
     render() {
         const {classes, posts} = this.props;
 
+        const colProps = {
+            xs: 12,
+            sm: 8,
+            md: 6,
+            lg: 4
+        };
+
         return (
             <div>
                 <AppBar title="All posts"/>
                 <Grid fluid>
-                    <Row>
-                        <Col xs={12}>
+                    <Row center="xs">
+                        <Col {...colProps}>
                             <div className={classes.filterContent}>
                                 <Button
                                     raised
@@ -157,11 +164,12 @@ class AllPosts extends Component {
                             </div>
                         </Col>
                     </Row>
-                    <Row>
-                        {posts.map(post => (
+
+                    {posts.map(post => (
+                        <Row center="xs" key={post.id}>
                             <Col
-                                key={post.id}
-                                xs={12}
+
+                                {...colProps}
                             >
                                 <Card className={classes.card}>
                                     <CardHeader
@@ -207,8 +215,9 @@ class AllPosts extends Component {
                                     </CardActions>
                                 </Card>
                             </Col>
-                        ))}
-                    </Row>
+                        </Row>
+                    ))}
+
                 </Grid>
                 <Button
                     fab
