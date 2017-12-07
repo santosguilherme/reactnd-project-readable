@@ -1,7 +1,11 @@
 import React from 'react';
 
 import TextField from 'material-ui/TextField';
-import MenuItem from 'material-ui/Menu/MenuItem';
+
+import Input, {InputLabel} from 'material-ui/Input';
+import {MenuItem} from 'material-ui/Menu';
+import {FormControl, FormHelperText} from 'material-ui/Form';
+import Select from 'material-ui/Select';
 
 
 export const DefaultTextField = (props) => {
@@ -23,34 +27,38 @@ export const DefaultTextField = (props) => {
 };
 
 export const DefaultSelectField = (props) => {
-    const {input, meta: {touched, error}, options, ...custom} = props;
+    const {label, placeholder, input: {value, onChange, name, onBlur, onFocus}, meta: {touched, error}, children} = props;
+
+    const handleChange = (event) => {
+        onChange(event.target.value);
+    };
+
+    const hasError = Boolean(touched && error);
 
     return (
-        <TextField
-            select
-            error={Boolean(touched && error)}
-            helperText={touched && error ? error : ''}
-            {...input}
-            {...custom}
-            fullWidth
-            InputLabelProps={{
-                shrink: true
-            }}
+        <FormControl
+            error={hasError}
             margin="normal"
-            onChange={(event, index, value) => input.onChange(value)}
-            children={createSelectFieldItems(options)}
-        />
+            fullWidth
+        >
+            <InputLabel>{label}</InputLabel>
+            <Select
+                value={value}
+                onChange={handleChange}
+                input={
+                    <Input
+                        name={name}
+                        error={hasError}
+                        placeholder={placeholder}
+                    />
+                }
+                placeholder={placeholder}
+                onBlur={onBlur}
+                onFocus={onFocus}
+            >
+                {children}
+            </Select>
+            <FormHelperText>{hasError ? error : ''}</FormHelperText>
+        </FormControl>
     );
-};
-
-export const createSelectFieldItems = (options) => {
-    const selectOptions = [
-        {label: 'Selecione uma opção', value: ''},
-        ...options
-    ];
-    return selectOptions.map(option => (
-        <MenuItem key={option.value} value={option.value}>
-            {option.label}
-        </MenuItem>
-    ));
 };

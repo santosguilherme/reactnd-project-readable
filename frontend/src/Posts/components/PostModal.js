@@ -1,11 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+
+import {compose} from 'redux';
+import {connect} from 'react-redux';
 
 import ResponsiveDialog from '../../commons/components/ResponsiveDialog/ResponsiveDialog';
 import PostForm from './PostForm';
 
+import {actions as categoriesActions, selectors as categoriesSelectors} from '../../redux/modules/categories';
 
-class PostModal extends React.Component {
+
+class PostModal extends Component {
+    componentWillMount() {
+        const {getAllCategories} = this.props;
+        getAllCategories();
+    }
+
     handleSaveClick = post => {
         const {onSavePost} = this.props;
         onSavePost(post);
@@ -15,7 +25,8 @@ class PostModal extends React.Component {
         const {
             open,
             title,
-            onCancel
+            onCancel,
+            categories
         } = this.props;
         return (
             <ResponsiveDialog
@@ -24,10 +35,13 @@ class PostModal extends React.Component {
                 className=""
                 showActions={false}
             >
-                <PostForm
-                    onSubmit={this.handleSaveClick}
-                    onCancel={onCancel}
-                />
+                {categories.length && (
+                    <PostForm
+                        onSubmit={this.handleSaveClick}
+                        onCancel={onCancel}
+                        categories={categories}
+                    />
+                )}
             </ResponsiveDialog>
         );
     }
@@ -36,7 +50,8 @@ class PostModal extends React.Component {
 PostModal.defaultProps = {
     post: {},
     title: 'Post',
-    open: false
+    open: false,
+    categories: []
 };
 
 PostModal.propTypes = {
@@ -44,7 +59,21 @@ PostModal.propTypes = {
     post: PropTypes.object,
     title: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
-    onSavePost: PropTypes.func.isRequired
+    onSavePost: PropTypes.func.isRequired,
+    /* redux */
+    categories: PropTypes.array
 };
 
-export default PostModal;
+function mapStateToProps(state) {
+    return {
+        categories: categoriesSelectors.getCategories(state)
+    }
+}
+
+const mapDispatchToProps = {
+    getAllCategories: categoriesActions.getAllCategories
+};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps)
+)(PostModal);

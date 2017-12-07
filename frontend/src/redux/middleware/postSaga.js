@@ -2,7 +2,6 @@ import {takeEvery} from 'redux-saga/effects';
 
 import {types as postsTypes, actions as postsActions} from '../modules/posts';
 
-
 import apiSaga from '../../commons/saga/apiSaga';
 import postsService from '../../commons/services/posts';
 
@@ -27,7 +26,7 @@ function* getPostById(action) {
     );
 }
 
-export default function* registerUserSaga() {
+export default function* postsSaga() {
     yield takeEvery(postsTypes.GET_ALL_POSTS_REQUEST, getAllPosts);
     yield takeEvery(postsTypes.GET_POST_REQUEST, getPostById);
 
