@@ -11,7 +11,7 @@ import {actions as categoriesActions, selectors as categoriesSelectors} from '..
 
 
 class PostModal extends Component {
-    componentWillMount() {
+    componentDidMount() {
         const {getAllCategories} = this.props;
         getAllCategories();
     }
@@ -28,6 +28,7 @@ class PostModal extends Component {
             onCancel,
             categories
         } = this.props;
+
         return (
             <ResponsiveDialog
                 open={open}

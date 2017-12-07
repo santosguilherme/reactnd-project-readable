@@ -55,7 +55,7 @@ const PostForm = ({handleSubmit, invalid, submitting, onCancel, categories}) => 
                     </MenuItem>
                 ))}
             </Field>
-            <div>
+            <div align="right">
                 <Button
                     onClick={onCancel}
                     color="primary"

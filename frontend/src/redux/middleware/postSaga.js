@@ -10,8 +10,7 @@ function* getAllPosts() {
     yield* apiSaga(
         postsService.allPosts,
         {},
-        postsActions.storagePosts,
-        null
+        postsActions.storagePosts
     );
 }
 
@@ -21,13 +20,23 @@ function* getPostById(action) {
     yield* apiSaga(
         postsService.byId,
         payload,
-        postsActions.storagePost,
-        null
+        postsActions.storagePost
+    );
+}
+
+function* createPost(action) {
+    const {payload} = action;
+
+    yield* apiSaga(
+        postsService.newPost,
+        payload,
+        postsActions.storagePost
     );
 }
 
 export default function* postsSaga() {
     yield takeEvery(postsTypes.GET_ALL_POSTS_REQUEST, getAllPosts);
     yield takeEvery(postsTypes.GET_POST_REQUEST, getPostById);
+    yield takeEvery(postsTypes.NEW_POST_REQUEST, createPost);
 
 }

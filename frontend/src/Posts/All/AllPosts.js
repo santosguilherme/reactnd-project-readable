@@ -45,7 +45,7 @@ const styles = theme => ({
     card: {
         marginTop: theme.spacing.unit,
         marginBottom: theme.spacing.unit,
-        //maxWidth: 400
+        textAlign: 'left'
     },
     cardContent: {
         paddingTop: '0',
@@ -71,9 +71,10 @@ class AllPosts extends Component {
     };
 
     handleSavePostModal = (post) => {
+        const {saveNewPost} = this.props;
         this.setState({postModalOpen: false});
 
-        console.log('saving post...', post);
+        saveNewPost(post);
     };
 
     handleCancelPostModal = () => {
@@ -85,11 +86,13 @@ class AllPosts extends Component {
     };
 
     renderPostTimestamp(post) {
+        const postDate = new Date(post.timestamp);
+
         return (
             <div className="flex-column-center">
                 <Typography component="span" align="center">
                     <FormattedDate
-                        value={new Date(post.timestamp)}
+                        value={postDate}
                         day='2-digit'
                     />
                 </Typography>
@@ -100,7 +103,7 @@ class AllPosts extends Component {
                     className="text-uppercase"
                 >
                     <FormattedDate
-                        value={new Date(post.timestamp)}
+                        value={postDate}
                         month='short'
                     />
                 </Typography>
@@ -139,13 +142,7 @@ class AllPosts extends Component {
 
     render() {
         const {classes, posts} = this.props;
-
-        const colProps = {
-            xs: 12,
-            sm: 8,
-            md: 6,
-            lg: 4
-        };
+        const colProps = {xs: 12, sm: 8, md: 6, lg: 4};
 
         return (
             <div>
@@ -243,9 +240,10 @@ AllPosts.defaultProps = {
 };
 
 AllPosts.propTypes = {
+    posts: PropTypes.arrayOf(PostPropType),
     /* actions */
     getAllPosts: PropTypes.func.isRequired,
-    posts: PropTypes.arrayOf(PostPropType),
+    saveNewPost: PropTypes.func.isRequired,
     /* router */
     history: PropTypes.object.isRequired
 };
