@@ -30,11 +30,7 @@ class PostDetails extends Component {
     componentDidMount() {
         const {match, getPostById, post} = this.props;
 
-        if (post) {
-            return;
-        }
-
-        getPostById(match.params.post);
+        !post && getPostById(match.params.post);
     }
 
     handleBackClick = () => {
@@ -61,17 +57,27 @@ class PostDetails extends Component {
         );
     }
 
-    log = type => {
-        return () => console.log(type);
+    handleVoteUpClick = () => {
+        const {voteUp, post} = this.props;
+
+        voteUp(post);
     };
 
-    renderPostVoteScore(post) {
+    handleVoteDownClick = () => {
+        const {voteDown, post} = this.props;
+
+        voteDown(post);
+    };
+
+    renderPostVoteScore() {
+        const {post} = this.props;
+
         return (
             <SpinNumber
                 value={post.voteScore}
                 caption="Scores"
-                onDown={this.log('down')}
-                onUp={this.log('up')}
+                onDown={this.handleVoteDownClick}
+                onUp={this.handleVoteUpClick}
             />
         );
     }
@@ -185,6 +191,8 @@ PostDetails.propTypes = {
     post: PostPropType,
     /* actions */
     getPostById: PropTypes.func.isRequired,
+    voteUp: PropTypes.func.isRequired,
+    voteDown: PropTypes.func.isRequired,
     /* router */
     history: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,

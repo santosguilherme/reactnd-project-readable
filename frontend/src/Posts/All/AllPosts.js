@@ -16,7 +16,6 @@ import MoreVertIcon from 'material-ui-icons/MoreVert';
 import AddIcon from 'material-ui-icons/Add';
 import IconButton from 'material-ui/IconButton';
 
-
 import Truncate from 'react-truncate';
 
 import {actions as postsActions, selectors as postsSelectors} from '../../redux/modules/posts';
@@ -28,6 +27,7 @@ import SpinNumber from '../../commons/components/SpinNumber/SpinNumber';
 
 import './allPosts.css';
 import PostModal from '../components/PostModal';
+
 
 const styles = theme => ({
     addButton: {
@@ -72,8 +72,8 @@ class AllPosts extends Component {
 
     handleSavePostModal = (post) => {
         const {saveNewPost} = this.props;
-        this.setState({postModalOpen: false});
 
+        this.setState({postModalOpen: false});
         saveNewPost(post);
     };
 
@@ -111,20 +111,25 @@ class AllPosts extends Component {
         );
     }
 
-    log = type => {
-        return () => console.log(type);
-    };
+    handleVoteUpClick(post) {
+        const {voteUp} = this.props;
+        voteUp(post);
+    }
+
+    handleVoteDownClick(post) {
+        const {voteDown} = this.props;
+        voteDown(post);
+    }
 
     renderPostVoteScore(post) {
         return (
             <SpinNumber
                 value={post.voteScore}
                 caption="SCORES"
-                onDown={this.log('down')}
-                onUp={this.log('up')}
+                onDown={() => this.handleVoteDownClick(post)}
+                onUp={() => this.handleVoteUpClick(post)}
             />
         );
-
     }
 
     renderPostommentCount(post) {
@@ -161,13 +166,9 @@ class AllPosts extends Component {
                             </div>
                         </Col>
                     </Row>
-
                     {posts.map(post => (
                         <Row center="xs" key={post.id}>
-                            <Col
-
-                                {...colProps}
-                            >
+                            <Col {...colProps}>
                                 <Card className={classes.card}>
                                     <CardHeader
                                         title={
@@ -214,7 +215,6 @@ class AllPosts extends Component {
                             </Col>
                         </Row>
                     ))}
-
                 </Grid>
                 <Button
                     fab
@@ -244,6 +244,8 @@ AllPosts.propTypes = {
     /* actions */
     getAllPosts: PropTypes.func.isRequired,
     saveNewPost: PropTypes.func.isRequired,
+    voteUp: PropTypes.func.isRequired,
+    voteDown: PropTypes.func.isRequired,
     /* router */
     history: PropTypes.object.isRequired
 };

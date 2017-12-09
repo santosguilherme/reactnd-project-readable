@@ -1,8 +1,8 @@
 import {createAction, handleActions} from 'redux-actions';
 
 /* Actions Types */
-const GET_ALL_CATEGORIES_REQUEST = 'services-portal/categories/GET_ALL_CATEGORIES_REQUEST';
-const GET_ALL_CATEGORIES_SUCCESS = 'services-portal/categories/GET_ALL_CATEGORIES_SUCCESS';
+const GET_ALL_CATEGORIES_REQUEST = 'readable/categories/GET_ALL_CATEGORIES_REQUEST';
+const GET_ALL_CATEGORIES_SUCCESS = 'readable/categories/GET_ALL_CATEGORIES_SUCCESS';
 
 export const types = {
     GET_ALL_CATEGORIES_REQUEST,

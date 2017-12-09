@@ -7,5 +7,7 @@ export default {
     byCategory: category => request.query(`${category}/${API_URL_BASE}`),
     allPosts: () => request.query(API_URL_BASE),
     newPost: post => request.save(API_URL_BASE, post),
-    byId: postId => request.get(`${API_URL_BASE}/${postId}`)
+    byId: postId => request.get(`${API_URL_BASE}/${postId}`),
+    voteUp: postId => request.save(`${API_URL_BASE}/${postId}`, {option: 'upVote'}),
+    voteDown: postId => request.save(`${API_URL_BASE}/${postId}`, {option: 'downVote'})
 };
