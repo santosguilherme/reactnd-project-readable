@@ -4,29 +4,23 @@ import PropTypes from 'prop-types';
 import {withRouter} from 'react-router';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {FormattedMessage, FormattedDate, injectIntl} from 'react-intl';
 import {withStyles} from 'material-ui/styles';
 
 import {Grid, Row, Col} from 'react-flexbox-grid';
 
-import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import Card, {CardHeader, CardContent, CardActions} from 'material-ui/Card';
-import MoreVertIcon from 'material-ui-icons/MoreVert';
 import AddIcon from 'material-ui-icons/Add';
-import IconButton from 'material-ui/IconButton';
 
-import Truncate from 'react-truncate';
 
 import {actions as postsActions, selectors as postsSelectors} from '../../redux/modules/posts';
 
 import AppBar from '../../App/AppBar'
 import PostPropType from '../PostPropType';
-import ThreeBoxDetails from '../../commons/components/ThreeBoxDetails/ThreeBoxDetails';
-import SpinNumber from '../../commons/components/SpinNumber/SpinNumber';
+
 
 import './allPosts.css';
 import PostModal from '../components/PostModal';
+import PostListItem from '../components/PostListItem';
 
 
 const styles = theme => ({
@@ -55,7 +49,8 @@ const styles = theme => ({
 
 class AllPosts extends Component {
     state = {
-        postModalOpen: false
+        postModalOpen: false,
+        selectedPost: undefined
     };
 
     componentDidMount() {
@@ -70,11 +65,29 @@ class AllPosts extends Component {
         history.push(`${category}/posts/${id}`);
     };
 
-    handleSavePostModal = (post) => {
+    handleSaveNewPost(post) {
         const {saveNewPost} = this.props;
 
         this.setState({postModalOpen: false});
         saveNewPost(post);
+    }
+
+    handleUpdatePost(post) {
+        const {updatePost} = this.props;
+
+        this.setState({postModalOpen: false, selectedPost: undefined});
+        updatePost(post);
+    }
+
+    handleSavePostModal = post => {
+        const {selectedPost} = this.state;
+
+        if (!selectedPost) {
+            this.handleSaveNewPost(post);
+            return;
+        }
+
+        this.handleUpdatePost(post);
     };
 
     handleCancelPostModal = () => {
@@ -85,67 +98,27 @@ class AllPosts extends Component {
         this.setState({postModalOpen: true});
     };
 
-    renderPostTimestamp(post) {
-        const postDate = new Date(post.timestamp);
-
-        return (
-            <div className="flex-column-center">
-                <Typography component="span" align="center">
-                    <FormattedDate
-                        value={postDate}
-                        day='2-digit'
-                    />
-                </Typography>
-                <Typography
-                    component="span"
-                    align="center"
-                    type="caption"
-                    className="text-uppercase"
-                >
-                    <FormattedDate
-                        value={postDate}
-                        month='short'
-                    />
-                </Typography>
-            </div>
-        );
-    }
-
-    handleVoteUpClick(post) {
+    handleVoteUp = post => {
         const {voteUp} = this.props;
         voteUp(post);
-    }
+    };
 
-    handleVoteDownClick(post) {
+    handleVoteDown = post => {
         const {voteDown} = this.props;
         voteDown(post);
-    }
+    };
 
-    renderPostVoteScore(post) {
-        return (
-            <SpinNumber
-                value={post.voteScore}
-                caption="SCORES"
-                onDown={() => this.handleVoteDownClick(post)}
-                onUp={() => this.handleVoteUpClick(post)}
-            />
-        );
-    }
+    handleEditPost = post => {
+        this.setState({postModalOpen: true, selectedPost: post});
+    };
 
-    renderPostommentCount(post) {
-        return (
-            <div className="flex-column-center">
-                <Typography component="span" align="center">
-                    {post.commentCount}
-                </Typography>
-                <Typography component="span" align="center" type="caption">
-                    COMMENTS
-                </Typography>
-            </div>
-        );
-    }
+    handleRemovePost = post => {
+        const {deletePost} = this.props;
+        deletePost(post);
+    };
 
     render() {
+        const {postModalOpen, selectedPost} = this.state;
         const {classes, posts} = this.props;
         const colProps = {xs: 12, sm: 8, md: 6, lg: 4};
 
@@ -169,49 +142,14 @@ class AllPosts extends Component {
                     {posts.map(post => (
                         <Row center="xs" key={post.id}>
                             <Col {...colProps}>
-                                <Card className={classes.card}>
-                                    <CardHeader
-                                        title={
-                                            <Typography type="title">
-                                                {post.title}
-                                            </Typography>
-                                        }
-                                        subheader={
-                                            <Typography type="subheading">
-                                                {post.author}
-                                            </Typography>
-                                        }
-                                        action={
-                                            <IconButton>
-                                                <MoreVertIcon/>
-                                            </IconButton>
-                                        }
-                                    />
-                                    <CardContent classes={{root: classes.cardContent}}>
-                                        <Typography
-                                            paragraph={true}
-                                            type="body1"
-                                        >
-                                            <Truncate lines={2}>
-                                                {post.body}
-                                            </Truncate>
-                                        </Typography>
-                                        <ThreeBoxDetails
-                                            left={this.renderPostTimestamp(post)}
-                                            center={this.renderPostVoteScore(post)}
-                                            right={this.renderPostommentCount(post)}
-                                        />
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button
-                                            dense
-                                            color="primary"
-                                            onClick={() => this.handleOpenPost(post)}
-                                        >
-                                            View post
-                                        </Button>
-                                    </CardActions>
-                                </Card>
+                                <PostListItem
+                                    post={post}
+                                    onOpenPost={this.handleOpenPost}
+                                    onEditPost={this.handleEditPost}
+                                    onRemovePost={this.handleRemovePost}
+                                    onVoteDown={this.handleVoteDown}
+                                    onVoteUp={this.handleVoteUp}
+                                />
                             </Col>
                         </Row>
                     ))}
@@ -225,7 +163,8 @@ class AllPosts extends Component {
                     <AddIcon/>
                 </Button>
                 <PostModal
-                    open={this.state.postModalOpen}
+                    open={postModalOpen}
+                    post={selectedPost}
                     onCancel={this.handleCancelPostModal}
                     onSavePost={this.handleSavePostModal}
                 />

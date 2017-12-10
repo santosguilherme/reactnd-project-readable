@@ -26,9 +26,9 @@ export const DefaultTextField = (props) => {
 };
 
 export const DefaultSelectField = (props) => {
-    const {label, placeholder, input: {value, onChange, name}, meta: {touched, error}, children} = props;
+    const {label, placeholder, disabled, input: {value, onChange, name}, meta: {touched, error}, children} = props;
 
-    const handleChange = (event) => {
+    const handleChange = event => {
         onChange(event.target.value);
     };
 
@@ -38,6 +38,7 @@ export const DefaultSelectField = (props) => {
         <FormControl
             error={hasError}
             margin="normal"
+            disabled={disabled}
             fullWidth
         >
             <InputLabel>{label}</InputLabel>

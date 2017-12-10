@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {compose} from 'redux';
+import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 
 import Button from 'material-ui/Button';
@@ -12,11 +14,14 @@ import {
 } from '../../commons/redux-form/componentsRenderer';
 import createValidate from '../../commons/redux-form/validatorUtils';
 
+import PostPropType from '../PostPropType';
 
-const PostForm = ({handleSubmit, invalid, submitting, onCancel, categories}) => {
+
+const PostForm = ({handleSubmit, invalid, submitting, onCancel, categories, post}) => {
     const selectOptions = [
         ...categories
     ];
+    const isEdit = Boolean(post.id);
 
     return (
         <form onSubmit={handleSubmit}>
@@ -25,6 +30,7 @@ const PostForm = ({handleSubmit, invalid, submitting, onCancel, categories}) => 
                 label="Author"
                 placeholder="Type post author"
                 component={DefaultTextField}
+                disabled={isEdit}
             />
             <Field
                 name="title"
@@ -45,6 +51,7 @@ const PostForm = ({handleSubmit, invalid, submitting, onCancel, categories}) => 
                 label="Category"
                 placeholder="Select the post category"
                 component={DefaultSelectField}
+                disabled={isEdit}
             >
                 {selectOptions.map(option => (
                     <MenuItem
@@ -74,11 +81,25 @@ const PostForm = ({handleSubmit, invalid, submitting, onCancel, categories}) => 
     );
 };
 
+PostForm.defaultProps = {
+    post: {}
+};
+
 PostForm.propTypes = {
+    post: PostPropType,
     categories: PropTypes.array.isRequired
 };
 
-export default reduxForm({
-    form: 'PostForm',
-    validate: createValidate(['title', 'body', 'author', 'category'])
-})(PostForm);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        initialValues: {...ownProps.post}
+    };
+};
+
+export default compose(
+    connect(mapStateToProps),
+    reduxForm({
+        form: 'PostForm',
+        validate: createValidate(['title', 'body', 'author', 'category'])
+    })
+)(PostForm);

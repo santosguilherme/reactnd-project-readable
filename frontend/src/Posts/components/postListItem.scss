@@ -1,0 +1,11 @@
+.post-list-item {
+  &__card {
+    margin: 10px 0;
+    text-align: left;
+  }
+
+  &__card-content {
+    padding-top: 0 !important; //material-ui fix
+    padding-bottom: 0 !important; //material-ui fix
+  }
+}

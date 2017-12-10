@@ -54,10 +54,32 @@ function* voteDownPost(action) {
     );
 }
 
+function* deletePost(action) {
+    const {payload} = action;
+
+    yield* apiSaga(
+        postsService.remove,
+        payload.id,
+        postsActions.deletePostSuccess
+    );
+}
+
+function* updatePost(action) {
+    const {payload} = action;
+
+    yield* apiSaga(
+        postsService.updatePost,
+        payload,
+        postsActions.updatePostArrayItem
+    );
+}
+
 export default function* postsSaga() {
     yield takeEvery(postsTypes.GET_ALL_POSTS_REQUEST, getAllPosts);
     yield takeEvery(postsTypes.GET_POST_REQUEST, getPostById);
     yield takeEvery(postsTypes.NEW_POST_REQUEST, createPost);
     yield takeEvery(postsTypes.POST_VOTE_UP, voteUpPost);
     yield takeEvery(postsTypes.POST_VOTE_DOWN, voteDownPost);
+    yield takeEvery(postsTypes.DELETE_POST_REQUEST, deletePost);
+    yield takeEvery(postsTypes.UPDATE_POST_REQUEST, updatePost);
 }

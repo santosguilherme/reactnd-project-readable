@@ -11,7 +11,9 @@ const NEW_POST_REQUEST = 'readable/posts/NEW_POST_REQUEST';
 const POST_VOTE_UP = 'readable/posts/POST_VOTE_UP';
 const POST_VOTE_DOWN = 'readable/posts/POST_VOTE_DOWN';
 const UPDATE_POST_ARRAY_ITEM = 'readable/posts/UPDATE_POST_ARRAY_ITEM';
-
+const DELETE_POST_REQUEST = 'readable/posts/DELETE_POST_REQUEST';
+const DELETE_POST_SUCCESS = 'readable/posts/DELETE_POST_SUCCESS';
+const UPDATE_POST_REQUEST = 'readable/posts/UPDATE_POST_REQUEST';
 
 export const types = {
     GET_ALL_POSTS_REQUEST,
@@ -21,7 +23,10 @@ export const types = {
     NEW_POST_REQUEST,
     POST_VOTE_UP,
     POST_VOTE_DOWN,
-    UPDATE_POST_ARRAY_ITEM
+    UPDATE_POST_ARRAY_ITEM,
+    DELETE_POST_REQUEST,
+    DELETE_POST_SUCCESS,
+    UPDATE_POST_REQUEST
 };
 
 /* Actions */
@@ -39,6 +44,9 @@ const saveNewPost = post => {
 const voteUp = createAction(POST_VOTE_UP);
 const voteDown = createAction(POST_VOTE_DOWN);
 const updatePostArrayItem = createAction(UPDATE_POST_ARRAY_ITEM);
+const deletePost = createAction(DELETE_POST_REQUEST);
+const deletePostSuccess = createAction(DELETE_POST_SUCCESS);
+const updatePost = createAction(UPDATE_POST_REQUEST);
 
 export const actions = {
     getAllPosts,
@@ -48,7 +56,10 @@ export const actions = {
     saveNewPost,
     voteUp,
     voteDown,
-    updatePostArrayItem
+    updatePostArrayItem,
+    deletePost,
+    deletePostSuccess,
+    updatePost
 };
 
 /* State */
@@ -65,6 +76,9 @@ export default handleActions({
     ]),
     [UPDATE_POST_ARRAY_ITEM]: (state, action) => {
         return updateItemInArray(state, action.payload.id, vote => action.payload);
+    },
+    [DELETE_POST_SUCCESS]: (state, action) => {
+        return state.filter(post => post.id !== action.payload.id);
     }
 }, initialState);
 

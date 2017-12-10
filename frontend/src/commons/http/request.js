@@ -8,5 +8,6 @@ export default {
     get: url => executeRequest('get', url),
     query: url => executeRequest('get', url),
     save: (url, data) => executeRequest('post', url, data),
-    update: (url, data) => executeRequest('put', url, data)
+    update: (url, data) => executeRequest('put', url, data),
+    remove: url => executeRequest('delete', url)
 };

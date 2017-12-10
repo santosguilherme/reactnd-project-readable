@@ -2,28 +2,30 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {withRouter} from 'react-router';
-import {FormattedMessage, FormattedDate, injectIntl} from 'react-intl';
+import {FormattedDate} from 'react-intl';
 
 
 import {Grid, Row, Col} from 'react-flexbox-grid';
 
 import IconButton from 'material-ui/IconButton';
 import ArrowBack from 'material-ui-icons/ArrowBack';
-import MoreVertIcon from 'material-ui-icons/MoreVert';
 import Person from 'material-ui-icons/Person';
 import Today from 'material-ui-icons/Today';
 import Typography from 'material-ui/Typography';
 
-import AppBar from '../../App/AppBar';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
+
+import AppBar from '../../App/AppBar';
 import {actions as postsActions, selectors as postsSelectors} from '../../redux/modules/posts';
 
-import PostPropType from '../PostPropType';
 import ThreeBoxDetails from '../../commons/components/ThreeBoxDetails/ThreeBoxDetails';
+import SpinNumber from '../../commons/components/SpinNumber/SpinNumber';
+import EditRemoveMenu from '../../commons/components/EditRemoveMenu/EditRemoveMenu';
+
+import PostPropType from '../PostPropType';
 
 import './postDetails.css';
-import SpinNumber from '../../commons/components/SpinNumber/SpinNumber';
 
 
 class PostDetails extends Component {
@@ -37,7 +39,30 @@ class PostDetails extends Component {
         this.props.history.push('/');
     };
 
-    renderPostTimestamp(post) {
+    handleVoteUpClick = () => {
+        const {voteUp, post} = this.props;
+
+        voteUp(post);
+    };
+
+    handleVoteDownClick = () => {
+        const {voteDown, post} = this.props;
+
+        voteDown(post);
+    };
+
+    handleEditPostClick = post => {
+        console.log('edit post', post);
+    };
+
+    handleRemovePostClick = post => {
+        console.log('remove post', post);
+
+    };
+
+    renderPostTimestamp() {
+        const {post} = this.props;
+
         return (
             <div className="flex-column-center">
                 <Today/>
@@ -56,18 +81,6 @@ class PostDetails extends Component {
             </div>
         );
     }
-
-    handleVoteUpClick = () => {
-        const {voteUp, post} = this.props;
-
-        voteUp(post);
-    };
-
-    handleVoteDownClick = () => {
-        const {voteDown, post} = this.props;
-
-        voteDown(post);
-    };
 
     renderPostVoteScore() {
         const {post} = this.props;
@@ -123,8 +136,8 @@ class PostDetails extends Component {
                 <Col {...colProps}>
                     <ThreeBoxDetails
                         left={this.renderPostAuthor()}
-                        center={this.renderPostVoteScore(post)}
-                        right={this.renderPostTimestamp(post)}
+                        center={this.renderPostVoteScore()}
+                        right={this.renderPostTimestamp()}
                     />
                 </Col>
             </Row>,
@@ -154,6 +167,10 @@ class PostDetails extends Component {
     render() {
         const {post} = this.props;
 
+        if (!post) {
+            return null;
+        }
+
         return (
             <div>
                 <AppBar
@@ -167,9 +184,12 @@ class PostDetails extends Component {
                         </IconButton>
                     }
                     rightButton={
-                        <IconButton color="contrast">
-                            <MoreVertIcon/>
-                        </IconButton>
+                        <EditRemoveMenu
+                            entity={post}
+                            onEdit={this.handleEditPostClick}
+                            onRemove={this.handleRemovePostClick}
+                            buttonProps={{color: 'contrast'}}
+                        />
                     }
                 />
                 <Grid

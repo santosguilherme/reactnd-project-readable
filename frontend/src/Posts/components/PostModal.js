@@ -24,6 +24,7 @@ class PostModal extends Component {
     render() {
         const {
             open,
+            post,
             title,
             onCancel,
             categories
@@ -38,6 +39,7 @@ class PostModal extends Component {
             >
                 {categories.length && (
                     <PostForm
+                        post={post}
                         onSubmit={this.handleSaveClick}
                         onCancel={onCancel}
                         categories={categories}
