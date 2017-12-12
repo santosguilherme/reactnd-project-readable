@@ -62,7 +62,7 @@ class AllPosts extends Component {
         const {history} = this.props;
         const {id, category} = post;
 
-        history.push(`${category}/posts/${id}`);
+        history.push(`${category}/posts/${id}`, {from: history.location.pathname});
     };
 
     handleSaveNewPost(post) {

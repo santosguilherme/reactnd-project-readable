@@ -36,8 +36,9 @@ class PostDetails extends Component {
 
     componentDidMount() {
         const {match, getPostById, post} = this.props;
+        const postLoaded = post && post.id;
 
-        !post && getPostById(match.params.post);
+        !postLoaded && getPostById(match.params.post);
     }
 
     handleBackClick = () => {
@@ -71,9 +72,16 @@ class PostDetails extends Component {
         this.setState({editModalOpen: false});
     };
 
-    handleRemovePostClick = post => {
-        console.log('remove post', post);
+    handleRemovePostClick = () => {
+        const {match, history, location, post, deletePost} = this.props;
+        const {category} = match.params;
+        const {state} = location;
+        const backUrl = state && state.from
+            ? state.from
+            : `/${category}`;
 
+        deletePost(post);
+        history.push(backUrl);
     };
 
     renderPostTimestamp() {
