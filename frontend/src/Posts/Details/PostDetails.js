@@ -27,6 +27,7 @@ import PostPropType from '../PostPropType';
 
 import './postDetails.css';
 import PostModal from '../components/PostModal';
+import PostCommentsList from './Comments/PostCommentsList';
 
 
 class PostDetails extends Component {
@@ -183,6 +184,11 @@ class PostDetails extends Component {
                     >
                         {post.commentCount} Comments
                     </Typography>
+                </Col>
+            </Row>,
+            <Row key={5}>
+                <Col {...colProps}>
+                    <PostCommentsList post={post}/>
                 </Col>
             </Row>
         ];

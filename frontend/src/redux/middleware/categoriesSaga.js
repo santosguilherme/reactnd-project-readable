@@ -10,8 +10,7 @@ function* getAllCategories() {
     yield* apiSaga(
         categoriesService.query,
         {},
-        categoriesActions.storageCategories,
-        null
+        categoriesActions.storageCategories
     );
 }
 
