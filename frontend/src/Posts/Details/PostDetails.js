@@ -26,9 +26,14 @@ import EditRemoveMenu from '../../commons/components/EditRemoveMenu/EditRemoveMe
 import PostPropType from '../PostPropType';
 
 import './postDetails.css';
+import PostModal from '../components/PostModal';
 
 
 class PostDetails extends Component {
+    state = {
+        editModalOpen: false
+    };
+
     componentDidMount() {
         const {match, getPostById, post} = this.props;
 
@@ -51,8 +56,19 @@ class PostDetails extends Component {
         voteDown(post);
     };
 
-    handleEditPostClick = post => {
-        console.log('edit post', post);
+    handleSavePostModal = post => {
+        const {updatePost} = this.props;
+
+        updatePost(post);
+        this.setState({editModalOpen: false});
+    };
+
+    handleEditPostClick = () => {
+        this.setState({editModalOpen: true});
+    };
+
+    handleCancelPostModal = () => {
+        this.setState({editModalOpen: false});
     };
 
     handleRemovePostClick = post => {
@@ -165,6 +181,7 @@ class PostDetails extends Component {
     }
 
     render() {
+        const {editModalOpen} = this.state;
         const {post} = this.props;
 
         if (!post) {
@@ -198,6 +215,12 @@ class PostDetails extends Component {
                 >
                     {post && this.renderPostDetails()}
                 </Grid>
+                <PostModal
+                    open={editModalOpen}
+                    post={post}
+                    onCancel={this.handleCancelPostModal}
+                    onSavePost={this.handleSavePostModal}
+                />
             </div>
         );
     }
