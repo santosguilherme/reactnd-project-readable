@@ -1,0 +1,14 @@
+.post-comment-list {
+  margin-top: 10px;
+
+  &__new-comment-container {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  &-item__card {
+    & + & {
+      margin-top: 15px;
+    }
+  }
+}

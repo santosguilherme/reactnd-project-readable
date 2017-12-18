@@ -28,6 +28,7 @@ import PostPropType from '../PostPropType';
 import './postDetails.css';
 import PostModal from '../components/PostModal';
 import PostCommentsList from './Comments/PostCommentsList';
+import {actions as commentsActions, selectors as commentsSelectors} from '../../redux/modules/comments';
 
 
 class PostDetails extends Component {
@@ -36,10 +37,14 @@ class PostDetails extends Component {
     };
 
     componentDidMount() {
-        const {match, getPostById, post} = this.props;
+        const {match, getPostById, post, getCommentsFromPost} = this.props;
         const postLoaded = post && post.id;
+        const postId = post && post.id
+            ? post.id
+            : match.params.post;
 
-        !postLoaded && getPostById(match.params.post);
+        !postLoaded && getPostById(postId);
+        postId && getCommentsFromPost(postId);
     }
 
     handleBackClick = () => {
@@ -135,7 +140,7 @@ class PostDetails extends Component {
     }
 
     renderPostDetails() {
-        const {post} = this.props;
+        const {post, comments} = this.props;
 
         const colProps = {
             xs: 12,
@@ -182,13 +187,16 @@ class PostDetails extends Component {
                         type="subheading"
                         component="h2"
                     >
-                        {post.commentCount} Comments
+                        {comments.length || post.commentCount} Comments
                     </Typography>
                 </Col>
             </Row>,
             <Row key={5}>
                 <Col {...colProps}>
-                    <PostCommentsList post={post}/>
+                    <PostCommentsList
+                        post={post}
+                        comments={comments}
+                    />
                 </Col>
             </Row>
         ];
@@ -241,11 +249,13 @@ class PostDetails extends Component {
 }
 
 PostDetails.defaultProps = {
-    post: undefined
+    post: undefined,
+    comments: []
 };
 
 PostDetails.propTypes = {
     post: PostPropType,
+    comments: PropTypes.array,
     /* actions */
     getPostById: PropTypes.func.isRequired,
     voteUp: PropTypes.func.isRequired,
@@ -259,12 +269,14 @@ const mapStateToProps = (state, ownProps) => {
     const {match} = ownProps;
 
     return {
-        post: postsSelectors.getPost(state, match.params.post)
+        post: postsSelectors.getPost(state, match.params.post),
+        comments: commentsSelectors.getComments(state)
     }
 };
 
 const mapDispatchToProps = {
-    ...postsActions
+    ...postsActions,
+    getCommentsFromPost: commentsActions.getCommentsFromPost
 };
 
 export default compose(

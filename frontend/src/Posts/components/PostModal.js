@@ -56,7 +56,7 @@ PostModal.defaultProps = {
     open: false,
     categories: []
 };
-
+//TODO: Post Proptypes
 PostModal.propTypes = {
     open: PropTypes.bool.isRequired,
     post: PropTypes.object,

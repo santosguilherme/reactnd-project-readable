@@ -1,0 +1,12 @@
+.post-comment-list-item {
+  &__card-content {
+    display: flex;
+    align-items: center;
+    padding-top: 0 !important; //material-ui fix
+    padding-bottom: 16px !important; //material-ui fix
+
+    .card-content__body {
+      flex: 1;
+    }
+  }
+}
