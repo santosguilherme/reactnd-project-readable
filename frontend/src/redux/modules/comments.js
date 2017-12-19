@@ -1,6 +1,8 @@
 import {createAction, handleActions} from 'redux-actions';
 import uuidv1 from 'uuid/v1';
 
+import {updateItemInArray} from '../reducersUtils';
+
 
 /* Actions Types */
 const GET_ALL_COMMENTS_FROM_POST_REQUEST = 'readable/comments/GET_ALL_COMMENTS_FROM_POST_REQUEST';
@@ -84,15 +86,3 @@ const getComments = state => state.comments.sort((prev, next) => next.voteScore 
 export const selectors = {
     getComments
 };
-
-function updateItemInArray(array, itemId, updateItemCallback) {
-    return array.map(item => {
-        if (item.id !== itemId) {
-            // Since we only want to update one item, preserve all others as they are now
-            return item;
-        }
-
-        // Use the provided callback to create an updated item
-        return updateItemCallback(item);
-    });
-}

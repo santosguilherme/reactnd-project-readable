@@ -1,6 +1,8 @@
 import {createAction, handleActions} from 'redux-actions';
 import uuidv1 from 'uuid/v1';
 
+import {updateItemInArray} from '../reducersUtils';
+
 
 /* Actions Types */
 const GET_ALL_POSTS_REQUEST = 'readable/posts/GET_ALL_POSTS_REQUEST';
@@ -90,16 +92,3 @@ export const selectors = {
     getPosts,
     getPost
 };
-
-
-function updateItemInArray(array, itemId, updateItemCallback) {
-    return array.map(item => {
-        if (item.id !== itemId) {
-            // Since we only want to update one item, preserve all others as they are now
-            return item;
-        }
-
-        // Use the provided callback to create an updated item
-        return updateItemCallback(item);
-    });
-}
