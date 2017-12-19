@@ -79,7 +79,7 @@ export default handleActions({
 }, initialState);
 
 /* Selectors */
-const getComments = state => state.comments;
+const getComments = state => state.comments.sort((prev, next) => next.voteScore - prev.voteScore);
 
 export const selectors = {
     getComments
