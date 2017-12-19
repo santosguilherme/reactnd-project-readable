@@ -21,6 +21,7 @@ import PostPropType from '../PostPropType';
 import './allPosts.css';
 import PostModal from '../components/PostModal';
 import PostListItem from '../components/PostListItem';
+import CategoryFilter from '../Category/CategoryFilter';
 
 
 const styles = theme => ({
@@ -137,6 +138,14 @@ class AllPosts extends Component {
                                     Filter and Sort
                                 </Button>
                             </div>
+                        </Col>
+                    </Row>
+                    <Row center="xs">
+                        <Col xs={6} sm={4} md={3} lg={2}>
+                            <CategoryFilter></CategoryFilter>
+                        </Col>
+                        <Col xs={6} sm={4} md={3} lg={2}>
+                            <CategoryFilter></CategoryFilter>
                         </Col>
                     </Row>
                     {posts.map(post => (
