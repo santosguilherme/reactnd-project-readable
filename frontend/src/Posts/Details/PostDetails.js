@@ -29,6 +29,7 @@ import './postDetails.css';
 import PostModal from '../components/PostModal';
 import PostCommentsList from './Comments/PostCommentsList';
 import {actions as commentsActions, selectors as commentsSelectors} from '../../redux/modules/comments';
+import FlexColumnCenter from '../../commons/components/FlexColumnCenter/FlexColumnCenter';
 
 
 class PostDetails extends Component {
@@ -94,7 +95,7 @@ class PostDetails extends Component {
         const {post} = this.props;
 
         return (
-            <div className="flex-column-center">
+            <FlexColumnCenter>
                 <Today/>
                 <Typography
                     component="span"
@@ -108,7 +109,7 @@ class PostDetails extends Component {
                         year="numeric"
                     />
                 </Typography>
-            </div>
+            </FlexColumnCenter>
         );
     }
 
@@ -130,12 +131,12 @@ class PostDetails extends Component {
         const {author} = post;
 
         return (
-            <div className="flex-column-center">
+            <FlexColumnCenter>
                 <Person/>
                 <Typography component="span" align="center" type="caption">
                     {author}
                 </Typography>
-            </div>
+            </FlexColumnCenter>
         );
     }
 

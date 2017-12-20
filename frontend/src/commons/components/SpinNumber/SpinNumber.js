@@ -6,12 +6,14 @@ import IconButton from 'material-ui/IconButton';
 import KeyboardArrowUp from 'material-ui-icons/KeyboardArrowUp';
 import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown';
 
+import FlexColumnCenter from '../FlexColumnCenter/FlexColumnCenter';
+
 
 function SpinNumber(props) {
     const {value, caption, onUp, onDown} = props;
 
     return (
-        <div className="flex-column-center">
+        <FlexColumnCenter>
             {onUp && (
                 <IconButton onClick={onUp}>
                     <KeyboardArrowUp/>
@@ -35,7 +37,7 @@ function SpinNumber(props) {
                     <KeyboardArrowDown/>
                 </IconButton>
             )}
-        </div>
+        </FlexColumnCenter>
     );
 }
 

@@ -15,6 +15,7 @@ import EditRemoveMenu from '../../commons/components/EditRemoveMenu/EditRemoveMe
 import PostPropType from '../PostPropType';
 
 import './postListItem.css';
+import FlexColumnCenter from '../../commons/components/FlexColumnCenter/FlexColumnCenter';
 
 
 class PostListItem extends Component {
@@ -48,7 +49,7 @@ class PostListItem extends Component {
         const postDate = new Date(post.timestamp);
 
         return (
-            <div className="flex-column-center">
+            <FlexColumnCenter>
                 <Typography
                     component="span"
                     align="center"
@@ -69,7 +70,7 @@ class PostListItem extends Component {
                         month='short'
                     />
                 </Typography>
-            </div>
+            </FlexColumnCenter>
         );
     }
 
@@ -90,7 +91,7 @@ class PostListItem extends Component {
         const {post} = this.props;
 
         return (
-            <div className="flex-column-center">
+            <FlexColumnCenter>
                 <Typography
                     component="span"
                     align="center"
@@ -104,7 +105,7 @@ class PostListItem extends Component {
                 >
                     COMMENTS
                 </Typography>
-            </div>
+            </FlexColumnCenter>
         );
     }
 
