@@ -16,7 +16,7 @@ import {actions as postsActions, selectors as postsSelectors} from '../../redux/
 import {actions as categoriesActions, selectors as categoriesSelectors} from '../../redux/modules/categories';
 import {actions as filterActions, selectors as filterSelectors} from '../../redux/modules/postsFilter';
 
-import AppBar from '../../App/AppBar'
+import AppBar from '../../commons/components/AppBar/AppBar'
 import PostPropType from '../PostPropType';
 import PostModal from '../components/PostModal';
 import PostListItem from '../components/PostListItem';

@@ -4,7 +4,7 @@ import {Switch, Route} from 'react-router-dom';
 import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles';
 
 import {IntlProvider} from 'react-intl';
-import {getIntlProviderConfig} from './intl';
+import {getIntlProviderConfig} from '../commons/i18n/intl';
 
 import AllPosts from '../Posts/All/AllPosts';
 import PostDetails from '../Posts/Details/PostDetails';

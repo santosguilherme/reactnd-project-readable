@@ -16,7 +16,7 @@ import Typography from 'material-ui/Typography';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 
-import AppBar from '../../App/AppBar';
+import AppBar from '../../commons/components/AppBar/AppBar';
 import {actions as postsActions, selectors as postsSelectors} from '../../redux/modules/posts';
 
 import ThreeBoxDetails from '../../commons/components/ThreeBoxDetails/ThreeBoxDetails';

@@ -5,8 +5,8 @@ import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'react-router-redux';
 import {Route} from 'react-router-dom';
 
-import {registerAxiosInterceptors} from './App/axios';
-import {configureReactIntlPolyfill} from './App/intl';
+import {registerAxiosInterceptors} from './commons/http/axios';
+import {configureReactIntlPolyfill} from './commons/i18n/intl';
 import configureStore from './redux/store';
 
 import App from './App/App';

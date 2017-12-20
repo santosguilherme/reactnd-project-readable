@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {getFormattedMessage} from './intl';
+import {getFormattedMessage} from '../i18n/intl';
 
 
 export const registerAxiosInterceptors = () => {

@@ -1,7 +1,7 @@
 import {IntlProvider, addLocaleData} from 'react-intl';
 import pt from 'react-intl/locale-data/pt';
 
-import {DEFAULT_LOCALE, getLocale} from '../commons/locale/locale';
+import {DEFAULT_LOCALE, getLocale} from '../locale/locale';
 
 import messages, {flattenMessages} from './messages';
 
