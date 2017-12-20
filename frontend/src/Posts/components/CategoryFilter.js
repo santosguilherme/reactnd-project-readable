@@ -55,7 +55,7 @@ class CategoryFilter extends Component {
                         onClick={this.handleClickListItem}
                     >
                         <ListItemText
-                            primary="Categorias"
+                            primary="Categoria"
                             secondary={selectedText}
                         />
                     </ListItem>
