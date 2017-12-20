@@ -1,5 +1,6 @@
 import {createAction, handleActions} from 'redux-actions';
 
+
 /* Actions Types */
 const GET_ALL_CATEGORIES_REQUEST = 'readable/categories/GET_ALL_CATEGORIES_REQUEST';
 const GET_ALL_CATEGORIES_SUCCESS = 'readable/categories/GET_ALL_CATEGORIES_SUCCESS';

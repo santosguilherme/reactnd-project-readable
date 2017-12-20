@@ -13,6 +13,8 @@ import AddIcon from 'material-ui-icons/Add';
 
 
 import {actions as postsActions, selectors as postsSelectors} from '../../redux/modules/posts';
+import {actions as categoriesActions, selectors as categoriesSelectors} from '../../redux/modules/categories';
+import {actions as filterActions, selectors as filterSelectors} from '../../redux/modules/postsFilter';
 
 import AppBar from '../../App/AppBar'
 import PostPropType from '../PostPropType';
@@ -22,6 +24,7 @@ import './allPosts.css';
 import PostModal from '../components/PostModal';
 import PostListItem from '../components/PostListItem';
 import CategoryFilter from '../Category/CategoryFilter';
+import OrderByFilter from '../Category/OrderByFilter';
 
 
 const styles = theme => ({
@@ -55,8 +58,9 @@ class AllPosts extends Component {
     };
 
     componentDidMount() {
-        const {getAllPosts} = this.props;
+        const {getAllPosts, getAllCategories} = this.props;
         getAllPosts();
+        getAllCategories();
     }
 
     handleOpenPost = post => {
@@ -118,9 +122,19 @@ class AllPosts extends Component {
         deletePost(post);
     };
 
+    handleChangeOrderByFilter = orderBy => {
+        const {updatePostsFilter} = this.props;
+        updatePostsFilter({orderBy});
+    };
+
+    handleChangeCategoryFilter = category => {
+        const {updatePostsFilter} = this.props;
+        updatePostsFilter({category});
+    };
+
     render() {
         const {postModalOpen, selectedPost} = this.state;
-        const {classes, posts} = this.props;
+        const {classes, posts, categories, orderBy, category} = this.props;
         const colProps = {xs: 12, sm: 8, md: 6, lg: 4};
 
         return (
@@ -142,10 +156,17 @@ class AllPosts extends Component {
                     </Row>
                     <Row center="xs">
                         <Col xs={6} sm={4} md={3} lg={2}>
-                            <CategoryFilter></CategoryFilter>
+                            <CategoryFilter
+                                selected={category}
+                                options={categories}
+                                onChange={this.handleChangeCategoryFilter}
+                            />
                         </Col>
                         <Col xs={6} sm={4} md={3} lg={2}>
-                            <CategoryFilter></CategoryFilter>
+                            <OrderByFilter
+                                selected={orderBy}
+                                onChange={this.handleChangeOrderByFilter}
+                            />
                         </Col>
                     </Row>
                     {posts.map(post => (
@@ -173,6 +194,7 @@ class AllPosts extends Component {
                 </Button>
                 <PostModal
                     open={postModalOpen}
+                    categories={categories}
                     post={selectedPost}
                     onCancel={this.handleCancelPostModal}
                     onSavePost={this.handleSavePostModal}
@@ -189,21 +211,35 @@ AllPosts.defaultProps = {
 
 AllPosts.propTypes = {
     posts: PropTypes.arrayOf(PostPropType),
+    orderBy: PropTypes.string,
+    category: PropTypes.string,
+    categories: PropTypes.array,
     /* actions */
     getAllPosts: PropTypes.func.isRequired,
     saveNewPost: PropTypes.func.isRequired,
     voteUp: PropTypes.func.isRequired,
     voteDown: PropTypes.func.isRequired,
+    updatePostsFilter: PropTypes.func.isRequired,
     /* router */
     history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-    posts: postsSelectors.getPosts(state)
-});
+const mapStateToProps = (state) => {
+    const orderBy = filterSelectors.getSelectedOderby(state);
+    const category = filterSelectors.getSelectedCategory(state);
+
+    return {
+        posts: postsSelectors.getPosts(state, orderBy, category),
+        categories: categoriesSelectors.getCategories(state),
+        orderBy,
+        category
+    };
+};
 
 const mapDispatchToProps = {
-    ...postsActions
+    ...postsActions,
+    ...categoriesActions,
+    ...filterActions
 };
 
 export default compose(

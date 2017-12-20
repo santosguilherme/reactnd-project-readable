@@ -1,11 +1,14 @@
 import {createAction, handleActions} from 'redux-actions';
 import uuidv1 from 'uuid/v1';
 
+import {sortBy} from '../../commons/array/arrayUtils';
 import {updateItemInArray} from '../reducersUtils';
 
 
 /* Actions Types */
 const GET_ALL_POSTS_REQUEST = 'readable/posts/GET_ALL_POSTS_REQUEST';
+const GET_CATEGORY_POSTS_REQUEST = 'readable/posts/GET_CATEGORY_POSTS_REQUEST';
+//FIXME: mudar nome da action
 const GET_ALL_POSTS_SUCCESS = 'readable/posts/GET_ALL_POSTS_SUCCESS';
 const GET_POST_REQUEST = 'readable/posts/GET_POST_REQUEST';
 const GET_POST_SUCCESS = 'readable/posts/GET_POST_SUCCESS';
@@ -19,6 +22,7 @@ const UPDATE_POST_REQUEST = 'readable/posts/UPDATE_POST_REQUEST';
 
 export const types = {
     GET_ALL_POSTS_REQUEST,
+    GET_CATEGORY_POSTS_REQUEST,
     GET_ALL_POSTS_SUCCESS,
     GET_POST_REQUEST,
     GET_POST_SUCCESS,
@@ -33,6 +37,7 @@ export const types = {
 
 /* Actions */
 const getAllPosts = createAction(GET_ALL_POSTS_REQUEST);
+const getCategoryPosts = createAction(GET_CATEGORY_POSTS_REQUEST);
 const storagePosts = createAction(GET_ALL_POSTS_SUCCESS);
 const getPostById = createAction(GET_POST_REQUEST);
 const storagePost = createAction(GET_POST_SUCCESS);
@@ -52,6 +57,7 @@ const updatePost = createAction(UPDATE_POST_REQUEST);
 
 export const actions = {
     getAllPosts,
+    getCategoryPosts,
     storagePosts,
     getPostById,
     storagePost,
@@ -85,7 +91,19 @@ export default handleActions({
 }, initialState);
 
 /* Selectors */
-const getPosts = state => state.posts;
+const getPosts = (state, orderBy, category) => {
+    let filtredPosts = [...state.posts];
+
+    if (category) {
+        filtredPosts = filtredPosts.filter(post => post.category === category);
+    }
+
+    if (orderBy) {
+        filtredPosts = sortBy(filtredPosts, orderBy);
+    }
+
+    return filtredPosts;
+};
 const getPost = (state, postId) => state.posts.find(post => post.id === postId);
 
 export const selectors = {

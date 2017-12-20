@@ -14,6 +14,16 @@ function* getAllPosts() {
     );
 }
 
+function* getCategoryPosts(action) {
+    const {payload} = action;
+
+    yield* apiSaga(
+        postsService.byCategory,
+        payload,
+        postsActions.storagePosts
+    );
+}
+
 function* getPostById(action) {
     const {payload} = action;
 
@@ -76,6 +86,7 @@ function* updatePost(action) {
 
 export default function* postsSaga() {
     yield takeEvery(postsTypes.GET_ALL_POSTS_REQUEST, getAllPosts);
+    yield takeEvery(postsTypes.GET_CATEGORY_POSTS_REQUEST, getCategoryPosts);
     yield takeEvery(postsTypes.GET_POST_REQUEST, getPostById);
     yield takeEvery(postsTypes.NEW_POST_REQUEST, createPost);
     yield takeEvery(postsTypes.POST_VOTE_UP, voteUpPost);

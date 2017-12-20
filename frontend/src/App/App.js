@@ -8,12 +8,10 @@ import {getIntlProviderConfig} from './intl';
 
 import AllPosts from '../Posts/All/AllPosts';
 import PostDetails from '../Posts/Details/PostDetails';
+import CategoryPosts from '../Posts/Category/CategoryPosts';
 
 
-//TODO: remove
-const theme = createMuiTheme({
-    palette: {}
-});
+const theme = createMuiTheme();
 
 class App extends Component {
     render() {
@@ -24,6 +22,7 @@ class App extends Component {
                 <IntlProvider {...intlProviderProps}>
                     <Switch>
                         <Route exact path="/" component={AllPosts}/>
+                        <Route exact path="/:category" component={CategoryPosts}/>
                         <Route path="/:category/posts/:post" component={PostDetails}/>
                     </Switch>
                 </IntlProvider>

@@ -6,6 +6,7 @@ import {reducer as form} from 'redux-form'
 import categories from './modules/categories';
 import posts from './modules/posts';
 import comments from './modules/comments';
+import postsFilter from './modules/postsFilter'
 
 
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
     form,
     categories,
     posts,
-    comments
+    comments,
+    postsFilter
 });
