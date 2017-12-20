@@ -4,22 +4,16 @@ import PropTypes from 'prop-types';
 import './threeBoxDetails.css';
 
 
-function ThreeBoxDetails(props) {
-    const {left, center, right} = props;
-
+function ThreeBoxDetails({left, center, right}) {
     return (
         <div className="three-box-details__container">
-            <div
-                className="three-box-details__box"
-            >
+            <div className="three-box-details__box">
                 {left}
             </div>
             <div className="three-box-details__box">
                 {center}
             </div>
-            <div
-                className="three-box-details__box"
-            >
+            <div className="three-box-details__box">
                 {right}
             </div>
         </div>
