@@ -125,8 +125,9 @@ class PostList extends Component {
 
     handleChangeCategoryFilter = category => {
         const {updatePostsFilter, history} = this.props;
+
         updatePostsFilter({category});
-        history.push(category, category);
+        history.push(category, {category});
     };
 
     render() {

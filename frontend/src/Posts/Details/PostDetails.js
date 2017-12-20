@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {withRouter} from 'react-router';
 import {FormattedDate} from 'react-intl';
 
-
 import {Grid, Row, Col} from 'react-flexbox-grid';
 
 import IconButton from 'material-ui/IconButton';
@@ -30,6 +29,7 @@ import PostModal from '../components/PostModal';
 import PostCommentsList from './Comments/PostCommentsList';
 import {actions as commentsActions, selectors as commentsSelectors} from '../../redux/modules/comments';
 import FlexColumnCenter from '../../commons/components/FlexColumnCenter/FlexColumnCenter';
+import withConfirm from '../../commons/components/Confirm/withConfirm';
 
 
 class PostDetails extends Component {
@@ -49,7 +49,15 @@ class PostDetails extends Component {
     }
 
     handleBackClick = () => {
-        this.props.history.push('/');
+        const {match, location, history} = this.props;
+
+        const {category} = match.params;
+        const {state} = location;
+        const backUrl = state && state.from
+            ? state.from
+            : `/${category}`;
+
+        history.push(backUrl);
     };
 
     handleVoteUpClick = () => {
@@ -80,15 +88,18 @@ class PostDetails extends Component {
     };
 
     handleRemovePostClick = () => {
-        const {match, history, location, post, deletePost} = this.props;
-        const {category} = match.params;
-        const {state} = location;
-        const backUrl = state && state.from
-            ? state.from
-            : `/${category}`;
+        const {confirm, match, history, location, post, deletePost} = this.props;
 
-        deletePost(post);
-        history.push(backUrl);
+        confirm('Deseja remover o post?', () => {
+            const {category} = match.params;
+            const {state} = location;
+            const backUrl = state && state.from
+                ? state.from
+                : `/${category}`;
+
+            deletePost(post);
+            history.push(backUrl);
+        });
     };
 
     renderPostTimestamp() {
@@ -188,7 +199,7 @@ class PostDetails extends Component {
                         type="subheading"
                         component="h2"
                     >
-                        {comments.length || post.commentCount} Comments
+                        {comments.length} Comments
                     </Typography>
                 </Col>
             </Row>,
@@ -264,6 +275,8 @@ PostDetails.propTypes = {
     /* router */
     history: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
+    /* confirm */
+    confirm: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -282,5 +295,6 @@ const mapDispatchToProps = {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
+    connect(mapStateToProps, mapDispatchToProps),
+    withConfirm
 )(PostDetails);

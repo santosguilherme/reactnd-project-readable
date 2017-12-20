@@ -15,7 +15,6 @@ export const registerAxiosInterceptors = () => {
     );
 
     axios.interceptors.response.use(response => response, (error) => {
-        debugger;
         const unknownError = !error || !error.response || !error.response.data || !error.response.data.message;
         let message = unknownError && getFormattedMessage('MESSAGES.COMMONS.UNKNOWN_ERROR');
 

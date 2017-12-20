@@ -12,6 +12,7 @@ import EditRemoveMenu from '../../../../commons/components/EditRemoveMenu/EditRe
 import SpinNumber from '../../../../commons/components/SpinNumber/SpinNumber';
 
 import './postCommentListItem.css';
+import withConfirm from '../../../../commons/components/Confirm/withConfirm';
 
 
 //FIXME: renomear
@@ -32,8 +33,11 @@ class PostCommentsListItem extends Component {
     };
 
     handleRemoveCommentClick = () => {
-        const {comment, onRemoveComment} = this.props;
-        onRemoveComment(comment);
+        const {confirm, comment, onRemoveComment} = this.props;
+
+        confirm('Deseja remover o comentário?', () => {
+            onRemoveComment(comment);
+        });
     };
 
     render() {
@@ -78,17 +82,17 @@ class PostCommentsListItem extends Component {
     }
 }
 
-
 PostCommentsListItem.defaultProps = {};
 
 //TODO: comment propTypes
-
 PostCommentsListItem.propTypes = {
     comment: PropTypes.object.isRequired,
     onEditComment: PropTypes.func.isRequired,
     onRemoveComment: PropTypes.func.isRequired,
     onVoteDown: PropTypes.func.isRequired,
-    onVoteUp: PropTypes.func.isRequired
+    onVoteUp: PropTypes.func.isRequired,
+    /* confirm */
+    confirm: PropTypes.func.isRequired
 };
 
-export default PostCommentsListItem
+export default withConfirm(PostCommentsListItem);

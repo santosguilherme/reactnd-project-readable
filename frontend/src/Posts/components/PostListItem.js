@@ -16,6 +16,7 @@ import PostPropType from '../PostPropType';
 
 import './postListItem.css';
 import FlexColumnCenter from '../../commons/components/FlexColumnCenter/FlexColumnCenter';
+import withConfirm from '../../commons/components/Confirm/withConfirm';
 
 
 class PostListItem extends Component {
@@ -35,8 +36,11 @@ class PostListItem extends Component {
     };
 
     handleRemovePostClick = () => {
-        const {post, onRemovePost} = this.props;
-        onRemovePost(post);
+        const {confirm, post, onRemovePost} = this.props;
+
+        confirm('Deseja remover o post?', () => {
+            onRemovePost(post);
+        });
     };
 
     handleOpenPost = () => {
@@ -168,7 +172,9 @@ PostListItem.propTypes = {
     onVoteUp: PropTypes.func.isRequired,
     onOpenPost: PropTypes.func.isRequired,
     onRemovePost: PropTypes.func.isRequired,
-    onEditPost: PropTypes.func.isRequired
+    onEditPost: PropTypes.func.isRequired,
+    /* confirm */
+    confirm: PropTypes.func.isRequired
 };
 
-export default PostListItem;
+export default withConfirm(PostListItem);

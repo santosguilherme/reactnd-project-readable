@@ -23,7 +23,9 @@ class CategoryPosts extends Component {
         getCategoryPosts(categoryParam);
 
         this.unlisten = this.props.history.listen(location => {
-            location.state && getCategoryPosts(location.state);
+            const {category} = location.state;
+
+            category && getCategoryPosts(category);
         });
     }
 
