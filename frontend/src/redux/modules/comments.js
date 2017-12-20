@@ -2,6 +2,7 @@ import {createAction, handleActions} from 'redux-actions';
 import uuidv1 from 'uuid/v1';
 
 import {updateItemInArray} from '../reducersUtils';
+import {sortBy} from '../../commons/array/arrayUtils';
 
 
 /* Actions Types */
@@ -81,7 +82,7 @@ export default handleActions({
 }, initialState);
 
 /* Selectors */
-const getComments = state => state.comments.sort((prev, next) => next.voteScore - prev.voteScore);
+const getComments = state => sortBy(state.comments, 'voteScore');
 
 export const selectors = {
     getComments
