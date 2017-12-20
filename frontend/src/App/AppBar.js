@@ -43,15 +43,6 @@ const AppBarWrapper = props => {
         >
             <Toolbar>
                 <div className={classes.leftButtonContent}>
-                    {/*
-                     <IconButton
-                        className={classes.leftButton}
-                        color="contrast"
-                        aria-label="Menu"
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    */}
                     {leftButton && (leftButton)}
                 </div>
                 <Typography
@@ -63,15 +54,6 @@ const AppBarWrapper = props => {
                     {title}
                 </Typography>
                 <div className={classes.rightButtonContent}>
-                    {/*
-                    <IconButton
-                        className={classes.rightButton}
-                        color="contrast"
-                        aria-label="Menu"
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    */}
                     {rightButton && (rightButton)}
                 </div>
             </Toolbar>
