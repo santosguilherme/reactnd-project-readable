@@ -15,7 +15,7 @@ import createValidate from '../../commons/redux-form/validatorUtils';
 import PostPropType from '../PostPropType';
 
 
-const PostForm = ({intl, handleSubmit, invalid, submitting, onCancel, categories, post}) => {
+function PostForm({intl, handleSubmit, invalid, submitting, onCancel, categories, post}) {
     const selectOptions = [
         ...categories
     ];

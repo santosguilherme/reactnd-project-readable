@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import {Switch, Route} from 'react-router-dom';
 import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles';
@@ -13,22 +13,20 @@ import CategoryPosts from '../Posts/Category/CategoryPosts';
 
 const theme = createMuiTheme();
 
-class App extends Component {
-    render() {
-        const intlProviderProps = getIntlProviderConfig();
+function App() {
+    const intlProviderProps = getIntlProviderConfig();
 
-        return (
-            <MuiThemeProvider theme={theme}>
-                <IntlProvider {...intlProviderProps}>
-                    <Switch>
-                        <Route exact path="/" component={AllPosts}/>
-                        <Route exact path="/:category" component={CategoryPosts}/>
-                        <Route path="/:category/posts/:post" component={PostDetails}/>
-                    </Switch>
-                </IntlProvider>
-            </MuiThemeProvider>
-        );
-    }
+    return (
+        <MuiThemeProvider theme={theme}>
+            <IntlProvider {...intlProviderProps}>
+                <Switch>
+                    <Route exact path="/" component={AllPosts}/>
+                    <Route exact path="/:category" component={CategoryPosts}/>
+                    <Route path="/:category/:post" component={PostDetails}/>
+                </Switch>
+            </IntlProvider>
+        </MuiThemeProvider>
+    );
 }
 
 export default App;

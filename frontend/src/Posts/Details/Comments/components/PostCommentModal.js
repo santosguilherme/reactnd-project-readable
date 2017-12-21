@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {injectIntl} from 'react-intl';
@@ -7,35 +7,33 @@ import ResponsiveDialog from '../../../../commons/components/ResponsiveDialog/Re
 import PostCommentForm from './PostCommentForm';
 
 
-class PostCommentModal extends Component {
-    handleSaveClick = comment => {
-        const {onSaveComment} = this.props;
+function PostCommentModal(props) {
+    const handleSaveClick = comment => {
+        const {onSaveComment} = props;
         onSaveComment(comment);
     };
 
-    render() {
-        const {
-            intl,
-            open,
-            comment,
-            title,
-            onCancel
-        } = this.props;
+    const {
+        intl,
+        open,
+        comment,
+        title,
+        onCancel
+    } = props;
 
-        return (
-            <ResponsiveDialog
-                open={open}
-                title={title || intl.formatMessage({id: 'LABELS.COMMENT'})}
-                showActions={false}
-            >
-                <PostCommentForm
-                    comment={comment}
-                    onSubmit={this.handleSaveClick}
-                    onCancel={onCancel}
-                />
-            </ResponsiveDialog>
-        );
-    }
+    return (
+        <ResponsiveDialog
+            open={open}
+            title={title || intl.formatMessage({id: 'LABELS.COMMENT'})}
+            showActions={false}
+        >
+            <PostCommentForm
+                comment={comment}
+                onSubmit={handleSaveClick}
+                onCancel={onCancel}
+            />
+        </ResponsiveDialog>
+    );
 }
 
 PostCommentModal.defaultProps = {

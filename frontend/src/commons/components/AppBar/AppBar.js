@@ -27,7 +27,7 @@ const styles = () => ({
     leftButton: {}
 });
 
-const AppBarWrapper = props => {
+function AppBarWrapper(props) {
     const {
         classes,
         leftButton,
@@ -59,7 +59,7 @@ const AppBarWrapper = props => {
             </Toolbar>
         </AppBar>
     );
-};
+}
 
 AppBarWrapper.defaultProps = {
     title: ''

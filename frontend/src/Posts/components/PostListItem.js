@@ -22,37 +22,37 @@ import PostPropType from '../PostPropType';
 import './postListItem.css';
 
 
-class PostListItem extends Component {
-    handleVoteUpClick = () => {
-        const {post, onVoteUp} = this.props;
+function PostListItem(props) {
+    const handleVoteUpClick = () => {
+        const {post, onVoteUp} = props;
         onVoteUp(post);
     };
 
-    handleVoteDownClick = () => {
-        const {post, onVoteDown} = this.props;
+    const handleVoteDownClick = () => {
+        const {post, onVoteDown} = props;
         onVoteDown(post);
     };
 
-    handleEditPostClick = () => {
-        const {post, onEditPost} = this.props;
+    const handleEditPostClick = () => {
+        const {post, onEditPost} = props;
         onEditPost(post);
     };
 
-    handleRemovePostClick = () => {
-        const {intl, confirm, post, onRemovePost} = this.props;
+    const handleRemovePostClick = () => {
+        const {intl, confirm, post, onRemovePost} = props;
 
         confirm(intl.formatMessage({id: 'MESSAGES.REMOVE_POST_CONFIRM'}), () => {
             onRemovePost(post);
         });
     };
 
-    handleOpenPost = () => {
-        const {post, onOpenPost} = this.props;
+    const handleOpenPost = () => {
+        const {post, onOpenPost} = props;
         onOpenPost(post);
     };
 
-    renderPostTimestamp() {
-        const {post} = this.props;
+    const renderPostTimestamp =() =>    {
+        const {post} = props;
         const postDate = new Date(post.timestamp);
 
         return (
@@ -79,10 +79,10 @@ class PostListItem extends Component {
                 </Typography>
             </FlexColumnCenter>
         );
-    }
+    };
 
-    renderPostVoteScore() {
-        const {intl, post} = this.props;
+    const renderPostVoteScore = () => {
+        const {intl, post} = props;
 
         return (
             <SpinNumber
@@ -91,14 +91,14 @@ class PostListItem extends Component {
                     {count: post.voteScore}
                 )}
                 captionClassName="text-uppercase"
-                onDown={this.handleVoteDownClick}
-                onUp={this.handleVoteUpClick}
+                onDown={handleVoteDownClick}
+                onUp={handleVoteUpClick}
             />
         );
-    }
+    };
 
-    renderPostCommentCount() {
-        const {post} = this.props;
+    const renderPostCommentCount = () => {
+        const {post} = props;
 
         return (
             <FlexColumnCenter>
@@ -123,59 +123,57 @@ class PostListItem extends Component {
                 </Typography>
             </FlexColumnCenter>
         );
-    }
+    };
 
-    render() {
-        const {post} = this.props;
+    const {post} = props;
 
-        return (
-            <Card className="post-list-item__card">
-                <CardHeader
-                    title={
-                        <Typography type="title">
-                            {post.title}
-                        </Typography>
-                    }
-                    subheader={
-                        <Typography type="subheading">
-                            {post.author}
-                        </Typography>
-                    }
-                    action={
-                        <EditRemoveMenu
-                            entity={post}
-                            onRemove={this.handleRemovePostClick}
-                            onEdit={this.handleEditPostClick}
-                        />
-                    }
-                />
-                <CardContent classes={{root: 'post-list-item__card-content'}}>
-                    <Typography
-                        paragraph={true}
-                        type="body1"
-                    >
-                        <Truncate lines={2}>
-                            {post.body}
-                        </Truncate>
+    return (
+        <Card className="post-list-item__card">
+            <CardHeader
+                title={
+                    <Typography type="title">
+                        {post.title}
                     </Typography>
-                    <ThreeBoxDetails
-                        left={this.renderPostTimestamp()}
-                        center={this.renderPostVoteScore()}
-                        right={this.renderPostCommentCount()}
+                }
+                subheader={
+                    <Typography type="subheading">
+                        {post.author}
+                    </Typography>
+                }
+                action={
+                    <EditRemoveMenu
+                        entity={post}
+                        onRemove={handleRemovePostClick}
+                        onEdit={handleEditPostClick}
                     />
-                </CardContent>
-                <CardActions>
-                    <Button
-                        dense
-                        color="primary"
-                        onClick={this.handleOpenPost}
-                    >
-                        <FormattedMessage id="LABELS.VIEW_POST_DETAILS"/>
-                    </Button>
-                </CardActions>
-            </Card>
-        );
-    }
+                }
+            />
+            <CardContent classes={{root: 'post-list-item__card-content'}}>
+                <Typography
+                    paragraph={true}
+                    type="body1"
+                >
+                    <Truncate lines={2}>
+                        {post.body}
+                    </Truncate>
+                </Typography>
+                <ThreeBoxDetails
+                    left={renderPostTimestamp()}
+                    center={renderPostVoteScore()}
+                    right={renderPostCommentCount()}
+                />
+            </CardContent>
+            <CardActions>
+                <Button
+                    dense
+                    color="primary"
+                    onClick={handleOpenPost}
+                >
+                    <FormattedMessage id="LABELS.VIEW_POST_DETAILS"/>
+                </Button>
+            </CardActions>
+        </Card>
+    );
 }
 
 PostListItem.propTypes = {

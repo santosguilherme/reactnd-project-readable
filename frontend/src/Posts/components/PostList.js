@@ -67,7 +67,7 @@ class PostList extends Component {
         const {history} = this.props;
         const {id, category} = post;
 
-        history.push(`${category}/posts/${id}`, {from: history.location.pathname});
+        history.push(`${category}/${id}`, {from: history.location.pathname});
     };
 
     handleSaveNewPost(post) {

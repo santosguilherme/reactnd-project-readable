@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {compose} from 'redux';
@@ -18,72 +18,70 @@ import SpinNumber from '../../../../commons/components/SpinNumber/SpinNumber';
 import './postCommentListItem.css';
 
 
-class PostCommentListItem extends Component {
-    handleVoteUpClick = () => {
-        const {comment, onVoteUp} = this.props;
+function PostCommentListItem(props) {
+    const handleVoteUpClick = () => {
+        const {comment, onVoteUp} = props;
         onVoteUp(comment);
     };
 
-    handleVoteDownClick = () => {
-        const {comment, onVoteDown} = this.props;
+    const handleVoteDownClick = () => {
+        const {comment, onVoteDown} = props;
         onVoteDown(comment);
     };
 
-    handleEditCommentClick = () => {
-        const {comment, onEditComment} = this.props;
+    const handleEditCommentClick = () => {
+        const {comment, onEditComment} = props;
         onEditComment(comment);
     };
 
-    handleRemoveCommentClick = () => {
-        const {intl, confirm, comment, onRemoveComment} = this.props;
+    const handleRemoveCommentClick = () => {
+        const {intl, confirm, comment, onRemoveComment} = props;
 
         confirm(intl.formatMessage({id: 'MESSAGES.REMOVE_COMMENT_CONFIRM'}), () => {
             onRemoveComment(comment);
         });
     };
 
-    render() {
-        const {intl, comment} = this.props;
-        const {author, timestamp, body} = comment;
+    const {intl, comment} = props;
+    const {author, timestamp, body} = comment;
 
-        return (
-            <Card className="post-comment-list-item__card">
-                <CardHeader
-                    avatar={
-                        <Avatar>
-                            <PersonIcon/>
-                        </Avatar>
-                    }
-                    title={author}
-                    subheader={
-                        <FormattedDateTime datetime={timestamp}/>
-                    }
-                    action={
-                        <EditRemoveMenu
-                            entity={comment}
-                            onRemove={this.handleRemoveCommentClick}
-                            onEdit={this.handleEditCommentClick}
-                        />
-                    }
-                />
-                <CardContent className="post-comment-list-item__card-content">
-                    <Typography className="card-content__body">
-                        {body}
-                    </Typography>
-                    <div>
-                        <SpinNumber
-                            value={comment.voteScore}
-                            caption={intl.formatMessage({id: 'LABELS.COMMENT_VOTE_SCORE_PLURAL'},
-                                {count: comment.voteScore}
-                            )}
-                            onDown={this.handleVoteDownClick}
-                            onUp={this.handleVoteUpClick}
-                        />
-                    </div>
-                </CardContent>
-            </Card>
-        );
-    }
+    return (
+        <Card className="post-comment-list-item__card">
+            <CardHeader
+                avatar={
+                    <Avatar>
+                        <PersonIcon/>
+                    </Avatar>
+                }
+                title={author}
+                subheader={
+                    <FormattedDateTime datetime={timestamp}/>
+                }
+                action={
+                    <EditRemoveMenu
+                        entity={comment}
+                        onRemove={handleRemoveCommentClick}
+                        onEdit={handleEditCommentClick}
+                    />
+                }
+            />
+            <CardContent className="post-comment-list-item__card-content">
+                <Typography className="card-content__body">
+                    {body}
+                </Typography>
+                <div>
+                    <SpinNumber
+                        value={comment.voteScore}
+                        caption={intl.formatMessage({id: 'LABELS.COMMENT_VOTE_SCORE_PLURAL'},
+                            {count: comment.voteScore}
+                        )}
+                        onDown={handleVoteDownClick}
+                        onUp={handleVoteUpClick}
+                    />
+                </div>
+            </CardContent>
+        </Card>
+    );
 }
 
 PostCommentListItem.defaultProps = {};

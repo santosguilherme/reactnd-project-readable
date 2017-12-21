@@ -12,7 +12,7 @@ import {DefaultTextField} from '../../../../commons/redux-form/componentsRendere
 import createValidate from '../../../../commons/redux-form/validatorUtils';
 
 
-const PostCommentForm = ({intl, handleSubmit, invalid, submitting, onCancel, comment}) => {
+function PostCommentForm({intl, handleSubmit, invalid, submitting, onCancel, comment}) {
     const isEdit = Boolean(comment.id);
 
     return (
@@ -49,7 +49,7 @@ const PostCommentForm = ({intl, handleSubmit, invalid, submitting, onCancel, com
             </div>
         </form>
     );
-};
+}
 
 PostCommentForm.defaultProps = {
     comment: {}
