@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {compose} from 'redux';
+import {injectIntl} from 'react-intl';
+
 import Button from 'material-ui/Button';
 import Dialog, {
     DialogActions,
@@ -8,6 +11,7 @@ import Dialog, {
     DialogTitle,
     withMobileDialog,
 } from 'material-ui/Dialog';
+
 
 function ResponsiveDialog(props) {
     const {
@@ -19,6 +23,7 @@ function ResponsiveDialog(props) {
         onCancel,
         onOk,
         showActions,
+        intl,
         children
     } = props;
 
@@ -34,19 +39,19 @@ function ResponsiveDialog(props) {
             <DialogContent>
                 {children}
             </DialogContent>
-            {showActions && (<
-                    DialogActions>
+            {showActions && (
+                <DialogActions>
                     <Button
                         onClick={onCancel}
                         color="primary"
                     >
-                        {cancelText}
+                        {cancelText || intl.formatMessage({id: 'LABELS.CANCEL'})}
                     </Button>
                     <Button
                         onClick={onOk}
                         color="primary"
                     >
-                        {okText}
+                        {okText || intl.formatMessage({id: 'LABELS.OK'})}
                     </Button>
                 </DialogActions>
             )}
@@ -55,8 +60,8 @@ function ResponsiveDialog(props) {
 }
 
 ResponsiveDialog.defaultProps = {
-    okText: 'Ok',
-    cancelText: 'Cancel',
+    okText: '',
+    cancelText: '',
     title: '',
     open: false,
     showActions: true
@@ -72,6 +77,11 @@ ResponsiveDialog.propTypes = {
     onOk: PropTypes.func,
     /* withMobileDialog */
     fullScreen: PropTypes.bool.isRequired,
+    /* intl */
+    intl: PropTypes.object.isRequired
 };
 
-export default withMobileDialog()(ResponsiveDialog);
+export default compose(
+    withMobileDialog(),
+    injectIntl
+)(ResponsiveDialog);

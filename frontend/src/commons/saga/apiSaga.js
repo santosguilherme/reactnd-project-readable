@@ -1,7 +1,6 @@
 import {call, put} from 'redux-saga/effects';
 
 
-
 const defaultSettings = {
   hideGlobalMessage: false,
   multiple: false,

@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import {compose} from 'redux';
+
+import {FormattedMessage} from 'react-intl';
 
 import Button from 'material-ui/Button';
 
 import {actions as commentsActions} from '../../../redux/modules/comments';
 
-import PostCommentsListItem from './components/PostCommentsListItem';
+import PostCommentListItem from './components/PostCommentListItem';
 import PostCommentModal from './components/PostCommentModal';
 import PostPropType from '../../PostPropType';
 
@@ -38,12 +41,9 @@ class PostCommentsList extends Component {
     handleSaveCommentModal = comment => {
         const {selectedComment} = this.state;
 
-        if (!selectedComment) {
-            this.handleSaveNewComment(comment);
-            return;
-        }
-
-        this.handleUpdateComment(comment);
+        selectedComment
+            ? this.handleUpdateComment(comment)
+            : this.handleSaveNewComment(comment);
     };
 
     handleNewComment = () => {
@@ -80,7 +80,7 @@ class PostCommentsList extends Component {
         return (
             <div className="post-comment-list">
                 {comments.map(comment => (
-                    <PostCommentsListItem
+                    <PostCommentListItem
                         key={comment.id}
                         comment={comment}
                         onVoteUp={this.handleVoteUp}
@@ -95,7 +95,7 @@ class PostCommentsList extends Component {
                         color="primary"
                         onClick={this.handleNewComment}
                     >
-                        New Comment
+                        <FormattedMessage id="LABELS.NEW_COMMENT"/>
                     </Button>
                 </div>
                 <PostCommentModal

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import {injectIntl} from 'react-intl';
+
 import List, {ListItem, ListItemText} from 'material-ui/List';
 import Menu, {MenuItem} from 'material-ui/Menu';
 
@@ -28,16 +30,15 @@ class CategoryFilter extends Component {
     };
 
     render() {
-        const {options, selected} = this.props;
-        const ALL_CATEGORIES_LABEL = 'Todas';
-        const menuOptions = [
-            {
-                name: ALL_CATEGORIES_LABEL,
-                path: ''
-            },
+        const {intl, options, selected} = this.props;
+        const allCategoriesLabel = intl.formatMessage({id: 'LABELS.ALL_CATEGORIES'});
+        const menuOptions = [{
+            name: allCategoriesLabel,
+            path: ''
+        },
             ...options
         ];
-        let selectedText = ALL_CATEGORIES_LABEL;
+        let selectedText = allCategoriesLabel;
 
         if (selected && options.length) {
             const selectedOption = options.find(option => option.path === selected);
@@ -55,7 +56,7 @@ class CategoryFilter extends Component {
                         onClick={this.handleClickListItem}
                     >
                         <ListItemText
-                            primary="Categoria"
+                            primary={intl.formatMessage({id: 'LABELS.CATEGORY'})}
                             secondary={selectedText}
                         />
                     </ListItem>
@@ -91,7 +92,9 @@ CategoryFilter.propTypes = {
     options: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
         path: PropTypes.string.isRequired
-    }))
+    })),
+    /* intl */
+    intl: PropTypes.object.isRequired
 };
 
-export default CategoryFilter;
+export default injectIntl(CategoryFilter);

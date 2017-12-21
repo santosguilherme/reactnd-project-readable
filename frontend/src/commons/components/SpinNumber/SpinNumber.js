@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
+
 import KeyboardArrowUp from 'material-ui-icons/KeyboardArrowUp';
 import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown';
 
@@ -10,7 +11,7 @@ import FlexColumnCenter from '../FlexColumnCenter/FlexColumnCenter';
 
 
 function SpinNumber(props) {
-    const {value, caption, onUp, onDown} = props;
+    const {value, caption, captionClassName, onUp, onDown} = props;
 
     return (
         <FlexColumnCenter>
@@ -29,6 +30,7 @@ function SpinNumber(props) {
                 component="span"
                 align="center"
                 type="caption"
+                className={captionClassName}
             >
                 {caption}
             </Typography>
@@ -43,11 +45,12 @@ function SpinNumber(props) {
 
 SpinNumber.defaultProps = {
     caption: '',
-    value: 0
+    value: 0,
+    captionClassName: ''
 };
 
-
 SpinNumber.propTypes = {
+    captionClassName: PropTypes.string,
     caption: PropTypes.string,
     value: PropTypes.number.isRequired,
     onUp: PropTypes.func,

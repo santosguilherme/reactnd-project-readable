@@ -5,23 +5,24 @@ import {withRouter} from 'react-router';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {withStyles} from 'material-ui/styles';
+import {injectIntl} from 'react-intl';
+
 
 import {Grid, Row, Col} from 'react-flexbox-grid';
 
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 
-
 import {actions as postsActions, selectors as postsSelectors} from '../../redux/modules/posts';
 import {actions as categoriesActions, selectors as categoriesSelectors} from '../../redux/modules/categories';
 import {actions as filterActions, selectors as filterSelectors} from '../../redux/modules/postsFilter';
 
 import AppBar from '../../commons/components/AppBar/AppBar'
-import PostPropType from '../PostPropType';
 import PostModal from '../components/PostModal';
 import PostListItem from '../components/PostListItem';
 import CategoryFilter from './CategoryFilter';
 import OrderByFilter from './OrderByFilter';
+import PostPropType from '../PostPropType';
 
 import './postList.css';
 
@@ -132,9 +133,11 @@ class PostList extends Component {
 
     render() {
         const {postModalOpen, selectedPost} = this.state;
-        const {classes, posts, categories, orderBy, category} = this.props;
+        const {intl, classes, posts, categories, orderBy, category} = this.props;
         const colProps = {xs: 12, sm: 8, md: 6, lg: 4};
-        const appBarTitle = `${category || 'Todos'} posts`;
+        const appBarTitle = intl.formatMessage({id: 'LABELS.APP_BAR_POST_LIST'}, {
+            category: category || intl.formatMessage({id: 'LABELS.ALL_POSTS'})
+        });
 
         return (
             <div>
@@ -207,7 +210,9 @@ PostList.propTypes = {
     voteDown: PropTypes.func.isRequired,
     updatePostsFilter: PropTypes.func.isRequired,
     /* router */
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    /* intl */
+    intl: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -231,5 +236,6 @@ const mapDispatchToProps = {
 export default compose(
     withRouter,
     connect(mapStateToProps, mapDispatchToProps),
-    withStyles(styles)
+    withStyles(styles),
+    injectIntl
 )(PostList);

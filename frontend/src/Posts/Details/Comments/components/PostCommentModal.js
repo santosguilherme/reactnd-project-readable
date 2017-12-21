@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import {injectIntl} from 'react-intl';
+
 import ResponsiveDialog from '../../../../commons/components/ResponsiveDialog/ResponsiveDialog';
 import PostCommentForm from './PostCommentForm';
 
@@ -13,6 +15,7 @@ class PostCommentModal extends Component {
 
     render() {
         const {
+            intl,
             open,
             comment,
             title,
@@ -22,8 +25,7 @@ class PostCommentModal extends Component {
         return (
             <ResponsiveDialog
                 open={open}
-                title={title}
-                className=""
+                title={title || intl.formatMessage({id: 'LABELS.COMMENT'})}
                 showActions={false}
             >
                 <PostCommentForm
@@ -38,7 +40,7 @@ class PostCommentModal extends Component {
 
 PostCommentModal.defaultProps = {
     comment: {},
-    title: 'Comment',
+    title: '',
     open: false
 };
 
@@ -47,7 +49,9 @@ PostCommentModal.propTypes = {
     comment: PropTypes.object,
     title: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
-    onSaveComment: PropTypes.func.isRequired
+    onSaveComment: PropTypes.func.isRequired,
+    /* intl */
+    intl: PropTypes.object.isRequired
 };
 
-export default PostCommentModal;
+export default injectIntl(PostCommentModal);

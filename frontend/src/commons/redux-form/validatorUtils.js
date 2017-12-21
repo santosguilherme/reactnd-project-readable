@@ -1,3 +1,6 @@
+import {getFormattedMessage} from '../i18n/intl';
+
+
 export default function createValidate(fields) {
     return function (values) {
         const errors = {};
@@ -6,7 +9,7 @@ export default function createValidate(fields) {
         //TODO: reduce em vez de forEach
         requiredFields.forEach(field => {
             if (!values[field]) {
-                errors[field] = 'Campo obrigatório';
+                errors[field] = getFormattedMessage('MESSAGES.REQUIRED_FIELD');
             }
         });
 

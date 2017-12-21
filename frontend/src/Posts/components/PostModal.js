@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import {injectIntl} from 'react-intl';
+
 import ResponsiveDialog from '../../commons/components/ResponsiveDialog/ResponsiveDialog';
 import PostForm from './PostForm';
 
@@ -13,6 +15,7 @@ class PostModal extends Component {
 
     render() {
         const {
+            intl,
             open,
             post,
             title,
@@ -23,11 +26,11 @@ class PostModal extends Component {
         return (
             <ResponsiveDialog
                 open={open}
-                title={title}
+                title={title || intl.formatMessage({id: 'LABELS.POST'})}
                 className=""
                 showActions={false}
             >
-                {categories.length && (
+                {Boolean(categories.length) && (
                     <PostForm
                         post={post}
                         onSubmit={this.handleSaveClick}
@@ -42,7 +45,7 @@ class PostModal extends Component {
 
 PostModal.defaultProps = {
     post: {},
-    title: 'Post',
+    title: '',
     open: false,
     categories: []
 };
@@ -53,7 +56,9 @@ PostModal.propTypes = {
     title: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
     onSavePost: PropTypes.func.isRequired,
-    categories: PropTypes.array
+    categories: PropTypes.array,
+    /* intl */
+    intl: PropTypes.object.isRequired
 };
 
-export default PostModal;
+export default injectIntl(PostModal);

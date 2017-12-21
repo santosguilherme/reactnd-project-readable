@@ -16,14 +16,14 @@ export const registerAxiosInterceptors = () => {
 
     axios.interceptors.response.use(response => response, (error) => {
         const unknownError = !error || !error.response || !error.response.data || !error.response.data.message;
-        let message = unknownError && getFormattedMessage('MESSAGES.COMMONS.UNKNOWN_ERROR');
+        let message = unknownError && getFormattedMessage('MESSAGES.UNKNOWN_ERROR');
 
         if (!unknownError && typeof error.response.data.message === 'string') {
             message = error.response.data.message;
         }
 
         if (error.response.status === 404) {
-            message = getFormattedMessage('MESSAGES.COMMONS.HTTP_NOT_FOUND');
+            message = getFormattedMessage('MESSAGES.HTTP_NOT_FOUND');
         }
 
         return Promise.reject(message);

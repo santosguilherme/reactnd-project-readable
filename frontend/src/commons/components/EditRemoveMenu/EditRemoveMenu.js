@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import {FormattedMessage} from 'react-intl';
+
 import IconButton from 'material-ui/IconButton';
 import Menu, {MenuItem} from 'material-ui/Menu';
 
@@ -52,8 +54,12 @@ class EditRemoveMenu extends Component {
                     open={open}
                     onRequestClose={this.handleRequestClose}
                 >
-                    <MenuItem onClick={this.handleEditClick}>Edit</MenuItem>
-                    <MenuItem onClick={this.handleRemoveClick}>Delete</MenuItem>
+                    <MenuItem onClick={this.handleEditClick}>
+                        <FormattedMessage id="LABELS.MENU_OPTION_EDIT"/>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleRemoveClick}>
+                        <FormattedMessage id="LABELS.MENU_OPTION_DELETE"/>
+                    </MenuItem>
                 </Menu>
             </div>
         );

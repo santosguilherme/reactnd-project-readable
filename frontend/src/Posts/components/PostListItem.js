@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 
+import {compose} from 'redux';
+import {injectIntl, FormattedMessage} from 'react-intl';
+
 import {FormattedDate} from 'react-intl';
 import Truncate from 'react-truncate';
 
@@ -11,12 +14,12 @@ import Button from 'material-ui/Button';
 import ThreeBoxDetails from '../../commons/components/ThreeBoxDetails/ThreeBoxDetails';
 import SpinNumber from '../../commons/components/SpinNumber/SpinNumber';
 import EditRemoveMenu from '../../commons/components/EditRemoveMenu/EditRemoveMenu';
+import FlexColumnCenter from '../../commons/components/FlexColumnCenter/FlexColumnCenter';
+import withConfirm from '../../commons/components/Confirm/withConfirm';
 
 import PostPropType from '../PostPropType';
 
 import './postListItem.css';
-import FlexColumnCenter from '../../commons/components/FlexColumnCenter/FlexColumnCenter';
-import withConfirm from '../../commons/components/Confirm/withConfirm';
 
 
 class PostListItem extends Component {
@@ -36,9 +39,9 @@ class PostListItem extends Component {
     };
 
     handleRemovePostClick = () => {
-        const {confirm, post, onRemovePost} = this.props;
+        const {intl, confirm, post, onRemovePost} = this.props;
 
-        confirm('Deseja remover o post?', () => {
+        confirm(intl.formatMessage({id: 'MESSAGES.REMOVE_POST_CONFIRM'}), () => {
             onRemovePost(post);
         });
     };
@@ -79,12 +82,15 @@ class PostListItem extends Component {
     }
 
     renderPostVoteScore() {
-        const {post} = this.props;
+        const {intl, post} = this.props;
 
         return (
             <SpinNumber
                 value={post.voteScore}
-                caption="SCORES"
+                caption={intl.formatMessage({id: 'LABELS.POST_VOTE_SCORE_PLURAL'},
+                    {count: post.voteScore}
+                )}
+                captionClassName="text-uppercase"
                 onDown={this.handleVoteDownClick}
                 onUp={this.handleVoteUpClick}
             />
@@ -106,8 +112,14 @@ class PostListItem extends Component {
                     component="span"
                     align="center"
                     type="caption"
+                    className="text-uppercase"
                 >
-                    COMMENTS
+                    <FormattedMessage
+                        id="LABELS.POST_COMMENTS"
+                        values={{
+                            count: post.commentCount
+                        }}
+                    />
                 </Typography>
             </FlexColumnCenter>
         );
@@ -158,7 +170,7 @@ class PostListItem extends Component {
                         color="primary"
                         onClick={this.handleOpenPost}
                     >
-                        View post
+                        <FormattedMessage id="LABELS.VIEW_POST_DETAILS"/>
                     </Button>
                 </CardActions>
             </Card>
@@ -174,7 +186,12 @@ PostListItem.propTypes = {
     onRemovePost: PropTypes.func.isRequired,
     onEditPost: PropTypes.func.isRequired,
     /* confirm */
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    /* intl */
+    intl: PropTypes.object.isRequired
 };
 
-export default withConfirm(PostListItem);
+export default compose(
+    withConfirm,
+    injectIntl
+)(PostListItem);

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
+import {injectIntl, FormattedMessage} from 'react-intl';
 
 import Button from 'material-ui/Button';
 
@@ -11,22 +12,22 @@ import {DefaultTextField} from '../../../../commons/redux-form/componentsRendere
 import createValidate from '../../../../commons/redux-form/validatorUtils';
 
 
-const PostCommentForm = ({handleSubmit, invalid, submitting, onCancel, comment}) => {
+const PostCommentForm = ({intl, handleSubmit, invalid, submitting, onCancel, comment}) => {
     const isEdit = Boolean(comment.id);
 
     return (
         <form onSubmit={handleSubmit}>
             <Field
                 name="author"
-                label="Author"
-                placeholder="Type comment author"
+                label={intl.formatMessage({id: 'LABELS.COMMENT_AUTHOR'})}
+                placeholder={intl.formatMessage({id: 'LABELS.COMMENT_AUTHOR_FORM_PLACEHOLDER'})}
                 component={DefaultTextField}
                 disabled={isEdit}
             />
             <Field
                 name="body"
-                label="Body"
-                placeholder="Type comment body"
+                label={intl.formatMessage({id: 'LABELS.COMMENT_BODY'})}
+                placeholder={intl.formatMessage({id: 'LABELS.COMMENT_BODY_FORM_PLACEHOLDER'})}
                 multiline={true}
                 rowsMax={6}
                 component={DefaultTextField}
@@ -36,14 +37,14 @@ const PostCommentForm = ({handleSubmit, invalid, submitting, onCancel, comment})
                     onClick={onCancel}
                     color="primary"
                 >
-                    {'Cancelar'}
+                    <FormattedMessage id="LABELS.CANCEL"/>
                 </Button>
                 <Button
                     color="primary"
                     type="submit"
                     disabled={invalid || submitting}
                 >
-                    {'Salvar comment'}
+                    <FormattedMessage id="LABELS.COMMENT_FORM_SAVE"/>
                 </Button>
             </div>
         </form>
@@ -55,7 +56,9 @@ PostCommentForm.defaultProps = {
 };
 
 PostCommentForm.propTypes = {
-    comment: PropTypes.object
+    comment: PropTypes.object,
+    /* intl */
+    intl: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -69,5 +72,6 @@ export default compose(
     reduxForm({
         form: 'PostCommentForm',
         validate: createValidate(['body', 'author'])
-    })
+    }),
+    injectIntl
 )(PostCommentForm);

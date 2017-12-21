@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {withRouter} from 'react-router';
-import {FormattedDate} from 'react-intl';
+import {injectIntl, FormattedDate, FormattedMessage} from 'react-intl';
 
 import {Grid, Row, Col} from 'react-flexbox-grid';
 
@@ -24,13 +24,14 @@ import EditRemoveMenu from '../../commons/components/EditRemoveMenu/EditRemoveMe
 
 import PostPropType from '../PostPropType';
 
-import './postDetails.css';
 import PostModal from '../components/PostModal';
 import PostCommentsList from './Comments/PostCommentsList';
 import {actions as commentsActions, selectors as commentsSelectors} from '../../redux/modules/comments';
+import {actions as categoriesActions, selectors as categoriesSelectors} from '../../redux/modules/categories';
 import FlexColumnCenter from '../../commons/components/FlexColumnCenter/FlexColumnCenter';
 import withConfirm from '../../commons/components/Confirm/withConfirm';
 
+import './postDetails.css';
 
 class PostDetails extends Component {
     state = {
@@ -38,7 +39,7 @@ class PostDetails extends Component {
     };
 
     componentDidMount() {
-        const {match, getPostById, post, getCommentsFromPost} = this.props;
+        const {match, getPostById, post, getCommentsFromPost, getAllCategories, categories} = this.props;
         const postLoaded = post && post.id;
         const postId = post && post.id
             ? post.id
@@ -46,18 +47,23 @@ class PostDetails extends Component {
 
         !postLoaded && getPostById(postId);
         postId && getCommentsFromPost(postId);
+        !categories.length && getAllCategories();
     }
 
-    handleBackClick = () => {
-        const {match, location, history} = this.props;
+    getBackUrl() {
+        const {match, location} = this.props;
 
         const {category} = match.params;
         const {state} = location;
-        const backUrl = state && state.from
+
+        return state && state.from
             ? state.from
             : `/${category}`;
+    }
 
-        history.push(backUrl);
+    handleBackClick = () => {
+        const {history} = this.props;
+        history.push(this.getBackUrl());
     };
 
     handleVoteUpClick = () => {
@@ -88,17 +94,11 @@ class PostDetails extends Component {
     };
 
     handleRemovePostClick = () => {
-        const {confirm, match, history, location, post, deletePost} = this.props;
+        const {intl, confirm, history, post, deletePost} = this.props;
 
-        confirm('Deseja remover o post?', () => {
-            const {category} = match.params;
-            const {state} = location;
-            const backUrl = state && state.from
-                ? state.from
-                : `/${category}`;
-
+        confirm(intl.formatMessage({id: 'MESSAGES.REMOVE_POST_CONFIRM'}), () => {
             deletePost(post);
-            history.push(backUrl);
+            history.push(this.getBackUrl());
         });
     };
 
@@ -125,12 +125,14 @@ class PostDetails extends Component {
     }
 
     renderPostVoteScore() {
-        const {post} = this.props;
+        const {intl, post} = this.props;
 
         return (
             <SpinNumber
                 value={post.voteScore}
-                caption="Scores"
+                caption={intl.formatMessage({id: 'LABELS.POST_VOTE_SCORE_PLURAL'},
+                    {count: post.voteScore}
+                )}
                 onDown={this.handleVoteDownClick}
                 onUp={this.handleVoteUpClick}
             />
@@ -144,7 +146,11 @@ class PostDetails extends Component {
         return (
             <FlexColumnCenter>
                 <Person/>
-                <Typography component="span" align="center" type="caption">
+                <Typography
+                    component="span"
+                    align="center"
+                    type="caption"
+                >
                     {author}
                 </Typography>
             </FlexColumnCenter>
@@ -199,7 +205,12 @@ class PostDetails extends Component {
                         type="subheading"
                         component="h2"
                     >
-                        {comments.length} Comments
+                        <FormattedMessage
+                            id="LABELS.POST_COMMENTS_COUNT"
+                            values={{
+                                count: comments.length
+                            }}
+                        />
                     </Typography>
                 </Col>
             </Row>,
@@ -216,7 +227,7 @@ class PostDetails extends Component {
 
     render() {
         const {editModalOpen} = this.state;
-        const {post} = this.props;
+        const {post, categories} = this.props;
 
         if (!post) {
             return null;
@@ -252,6 +263,7 @@ class PostDetails extends Component {
                 <PostModal
                     open={editModalOpen}
                     post={post}
+                    categories={categories}
                     onCancel={this.handleCancelPostModal}
                     onSavePost={this.handleSavePostModal}
                 />
@@ -262,12 +274,14 @@ class PostDetails extends Component {
 
 PostDetails.defaultProps = {
     post: undefined,
-    comments: []
+    comments: [],
+    categories: []
 };
 
 PostDetails.propTypes = {
     post: PostPropType,
     comments: PropTypes.array,
+    categories: PropTypes.array,
     /* actions */
     getPostById: PropTypes.func.isRequired,
     voteUp: PropTypes.func.isRequired,
@@ -276,7 +290,9 @@ PostDetails.propTypes = {
     history: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
     /* confirm */
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    /* intl */
+    intl: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -284,17 +300,20 @@ const mapStateToProps = (state, ownProps) => {
 
     return {
         post: postsSelectors.getPost(state, match.params.post),
-        comments: commentsSelectors.getComments(state)
+        comments: commentsSelectors.getComments(state),
+        categories: categoriesSelectors.getCategories(state)
     }
 };
 
 const mapDispatchToProps = {
     ...postsActions,
+    ...categoriesActions,
     getCommentsFromPost: commentsActions.getCommentsFromPost
 };
 
 export default compose(
     withRouter,
     connect(mapStateToProps, mapDispatchToProps),
-    withConfirm
+    withConfirm,
+    injectIntl
 )(PostDetails);

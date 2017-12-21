@@ -8,14 +8,13 @@ import {Route} from 'react-router-dom';
 import {registerAxiosInterceptors} from './commons/http/axios';
 import {configureReactIntlPolyfill} from './commons/i18n/intl';
 import configureStore from './redux/store';
+import registerServiceWorker from './registerServiceWorker';
 
 import App from './App/App';
 
 import 'typeface-roboto';
 
 import './index.css';
-
-import registerServiceWorker from './registerServiceWorker';
 
 
 function renderApp(store) {
@@ -33,7 +32,7 @@ function renderApp(store) {
 
 function startApp() {
     const store = configureStore();
-    //injectTapEventPlugin();
+
     registerAxiosInterceptors();
     configureReactIntlPolyfill(() => {
         renderApp(store);

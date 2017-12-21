@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import {injectIntl} from 'react-intl';
+
 import List, {ListItem, ListItemText} from 'material-ui/List';
 import Menu, {MenuItem} from 'material-ui/Menu';
 
-const options = {
-    timestamp: 'LABELS.TIMESTAMP',
-    voteScore: 'LABELS.VOTE_SCORE',
-    author: 'LABELS.AUTHOR'
-};
 
+const options = {
+    timestamp: 'LABELS.POST_TIMESTAMP',
+    voteScore: 'LABELS.POST_VOTE_SCORE',
+    author: 'LABELS.POST_AUTHOR'
+};
 
 class OrderByFilter extends Component {
     state = {
@@ -34,7 +36,7 @@ class OrderByFilter extends Component {
     };
 
     render() {
-        const {selected} = this.props;
+        const {intl, selected} = this.props;
 
         return (
             <div>
@@ -44,8 +46,8 @@ class OrderByFilter extends Component {
                         onClick={this.handleClickListItem}
                     >
                         <ListItemText
-                            primary="Ordenação"
-                            secondary={options[selected]}
+                            primary={intl.formatMessage({id: 'LABELS.ORDER_BY'})}
+                            secondary={intl.formatMessage({id: options[selected]})}
                         />
                     </ListItem>
                 </List>
@@ -60,7 +62,7 @@ class OrderByFilter extends Component {
                             selected={optionKey === selected}
                             onClick={event => this.handleMenuItemClick(event, index, optionKey)}
                         >
-                            {options[optionKey]}
+                            {intl.formatMessage({id: options[optionKey]})}
                         </MenuItem>
                     ))}
                 </Menu>
@@ -78,4 +80,4 @@ OrderByFilter.propTypes = {
     onChange: PropTypes.func.isRequired
 };
 
-export default OrderByFilter;
+export default injectIntl(OrderByFilter);
