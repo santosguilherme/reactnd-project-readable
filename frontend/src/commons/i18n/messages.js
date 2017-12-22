@@ -54,6 +54,8 @@ export default {
 
             'HTTP_NOT_FOUND': 'Não foi possível conectar-se ao servidor.',
 
+            'LOADING': 'Aguarde um instante...',
+
             'POST_CREATE_SUCCESS': 'Post criado com sucesso!',
             'POST_DELETE_SUCCESS': 'Post removido com sucesso!',
             'POST_VOTE_SUCCESS': 'Voto realizado com sucesso!',

@@ -1,29 +1,30 @@
+import {delay} from 'redux-saga'
 import {call, put} from 'redux-saga/effects';
 
+import {actions as loadingActions} from '../../redux/modules/loading';
 import {showErrorMessage, showSuccessMessage} from '../notifications/notifications';
 import {getFormattedMessage} from '../i18n/intl';
 
 
 export default function* apiSaga(fn, parameter, success, successMessageKey, failure, failureMessageKey) {
     try {
-        //yield put(remoteDataActions.start(scope));
+        yield put(loadingActions.showLoading());
 
         const response = yield call(fn, parameter);
         const data = response ? response.data : {};
-
-        //yield put(remoteDataActions.complete(scope, data));
 
         if (success) {
             yield put(success(data));
         }
 
+        yield delay(1000);
+
         if (successMessageKey) {
             const successMessage = getFormattedMessage(successMessageKey);
             yield put(showSuccessMessage(successMessage));
         }
-    } catch (error) {
-        //yield put(remoteDataActions.failure(scope, error));
 
+    } catch (error) {
         const failureMessage = failureMessageKey
             ? getFormattedMessage(failureMessageKey)
             : error;
@@ -34,6 +35,6 @@ export default function* apiSaga(fn, parameter, success, successMessageKey, fail
             yield put(failure(error));
         }
     } finally {
-        console.log('finally saga');
+        yield put(loadingActions.hideLoading());
     }
 }

@@ -7,6 +7,7 @@ import {IntlProvider} from 'react-intl';
 
 import {getIntlProviderConfig} from '../commons/i18n/intl';
 import AppNotifications from '../commons/components/AppNotifications/AppNotifications';
+import AppLoading from '../commons/components/AppLoading/AppLoading';
 
 import AllPosts from '../Posts/All/AllPosts';
 import PostDetails from '../Posts/Details/PostDetails';
@@ -23,6 +24,7 @@ function App() {
             <IntlProvider {...intlProviderProps}>
                 <div>
                     <AppNotifications/>
+                    <AppLoading/>
                     <Switch>
                         <Route exact path="/" component={AllPosts}/>
                         <Route exact path="/:category" component={CategoryPosts}/>
