@@ -5,13 +5,13 @@ import {withRouter} from 'react-router';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {withStyles} from 'material-ui/styles';
-import {injectIntl} from 'react-intl';
-
+import {injectIntl, FormattedMessage} from 'react-intl';
 
 import {Grid, Row, Col} from 'react-flexbox-grid';
 
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
+import Typography from 'material-ui/Typography';
 
 import {actions as postsActions, selectors as postsSelectors} from '../../redux/modules/posts';
 import {actions as categoriesActions, selectors as categoriesSelectors} from '../../redux/modules/categories';
@@ -20,6 +20,8 @@ import {actions as filterActions, selectors as filterSelectors} from '../../redu
 import AppBar from '../../commons/components/AppBar/AppBar'
 import PostModal from '../components/PostModal';
 import PostListItem from '../components/PostListItem';
+import If from '../../commons/components/If/If';
+
 import CategoryFilter from './CategoryFilter';
 import OrderByFilter from './OrderByFilter';
 import PostPropType from '../PostPropType';
@@ -172,6 +174,15 @@ class PostList extends Component {
                             </Col>
                         </Row>
                     ))}
+                    <If test={!posts.length}>
+                        <Typography
+                            type="subheading"
+                            component="p"
+                            align="center"
+                        >
+                            <FormattedMessage id="LABELS.POSTS_NOT_FOUND"/>
+                        </Typography>
+                    </If>
                 </Grid>
                 <Button
                     fab

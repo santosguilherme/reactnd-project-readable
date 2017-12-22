@@ -40,7 +40,8 @@ function* createPost(action) {
     yield* apiSaga(
         postsService.newPost,
         payload,
-        postsActions.storagePost
+        postsActions.storagePost,
+        'MESSAGES.POST_CREATE_SUCCESS'
     );
 }
 
@@ -50,7 +51,8 @@ function* voteUpPost(action) {
     yield* apiSaga(
         postsService.voteUp,
         payload.id,
-        postsActions.updatePostArrayItem
+        postsActions.updatePostArrayItem,
+        'MESSAGES.POST_VOTE_SUCCESS'
     );
 }
 
@@ -60,7 +62,8 @@ function* voteDownPost(action) {
     yield* apiSaga(
         postsService.voteDown,
         payload.id,
-        postsActions.updatePostArrayItem
+        postsActions.updatePostArrayItem,
+        'MESSAGES.POST_VOTE_SUCCESS'
     );
 }
 
@@ -70,7 +73,8 @@ function* deletePost(action) {
     yield* apiSaga(
         postsService.remove,
         payload.id,
-        postsActions.deletePostSuccess
+        postsActions.deletePostSuccess,
+        'MESSAGES.POST_DELETE_SUCCESS'
     );
 }
 
@@ -80,7 +84,8 @@ function* updatePost(action) {
     yield* apiSaga(
         postsService.updatePost,
         payload,
-        postsActions.updatePostArrayItem
+        postsActions.updatePostArrayItem,
+        'MESSAGES.POST_UPDATE_SUCCESS'
     );
 }
 

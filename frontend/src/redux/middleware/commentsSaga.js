@@ -22,7 +22,8 @@ function* voteUpComment(action) {
     yield* apiSaga(
         commentsService.voteUp,
         payload.id,
-        commentsActions.updateCommentsArrayItem
+        commentsActions.updateCommentsArrayItem,
+        'MESSAGES.COMMENT_VOTE_SUCCESS'
     );
 }
 
@@ -32,7 +33,8 @@ function* voteDownComment(action) {
     yield* apiSaga(
         commentsService.voteDown,
         payload.id,
-        commentsActions.updateCommentsArrayItem
+        commentsActions.updateCommentsArrayItem,
+        'MESSAGES.COMMENT_VOTE_SUCCESS'
     );
 }
 
@@ -42,7 +44,8 @@ function* deleteComment(action) {
     yield* apiSaga(
         commentsService.remove,
         payload.id,
-        commentsActions.deleteCommentSuccess
+        commentsActions.deleteCommentSuccess,
+        'MESSAGES.COMMENT_DELETE_SUCCESS'
     );
 }
 
@@ -52,7 +55,8 @@ function* updateComment(action) {
     yield* apiSaga(
         commentsService.updateComment,
         payload,
-        commentsActions.updateCommentsArrayItem
+        commentsActions.updateCommentsArrayItem,
+        'MESSAGES.COMMENT_UPDATE_SUCCESS'
     );
 }
 
@@ -62,7 +66,8 @@ function* createComment(action) {
     yield* apiSaga(
         commentsService.newComment,
         payload,
-        commentsActions.addCommentsArrayItem
+        commentsActions.addCommentsArrayItem,
+        'MESSAGES.COMMENT_CREATE_SUCCESS'
     );
 }
 

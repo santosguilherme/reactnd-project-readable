@@ -34,6 +34,7 @@ export default {
             'POST_TITLE_FORM_PLACEHOLDER': 'Digite o título do post',
             'POST_VOTE_SCORE': 'Votos',
             'POST_VOTE_SCORE_PLURAL': '{count, plural, =0 {Votos} one {Voto} other {Votos}}',
+            'POSTS_NOT_FOUND': 'Não foi encontrado nenhum post, tente refazer a busca ou criar um novo...',
 
             'MENU_OPTION_EDIT': 'Editar',
             'MENU_OPTION_DELETE': 'Remover',
@@ -46,7 +47,17 @@ export default {
             'VIEW_POST_DETAILS': 'Visualizar post'
         },
         'MESSAGES': {
+            'COMMENT_CREATE_SUCCESS': 'Comentário criado com sucesso!',
+            'COMMENT_DELETE_SUCCESS': 'Comentário removido com sucesso!',
+            'COMMENT_VOTE_SUCCESS': 'Voto realizado com sucesso!',
+            'COMMENT_UPDATE_SUCCESS': 'Comentário atualizado com sucesso!',
+
             'HTTP_NOT_FOUND': 'Não foi possível conectar-se ao servidor.',
+
+            'POST_CREATE_SUCCESS': 'Post criado com sucesso!',
+            'POST_DELETE_SUCCESS': 'Post removido com sucesso!',
+            'POST_VOTE_SUCCESS': 'Voto realizado com sucesso!',
+            'POST_UPDATE_SUCCESS': 'Post atualizado com sucesso!',
 
             'REQUIRED_FIELD': 'Campo obrigatório',
             'REMOVE_COMMENT_CONFIRM': 'Você confirma que deseja remover o comentário?',
