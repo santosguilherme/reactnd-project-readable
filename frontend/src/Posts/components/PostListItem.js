@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
 
 import {compose} from 'redux';
@@ -51,7 +51,7 @@ function PostListItem(props) {
         onOpenPost(post);
     };
 
-    const renderPostTimestamp =() =>    {
+    const renderPostTimestamp = () => {
         const {post} = props;
         const postDate = new Date(post.timestamp);
 
