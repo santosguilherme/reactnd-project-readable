@@ -10,7 +10,7 @@ function* getAllPosts() {
     yield* apiSaga(
         postsService.allPosts,
         {},
-        postsActions.storagePosts
+        postsActions.updatePostsArray
     );
 }
 
@@ -20,7 +20,7 @@ function* getCategoryPosts(action) {
     yield* apiSaga(
         postsService.byCategory,
         payload,
-        postsActions.storagePosts
+        postsActions.updatePostsArray
     );
 }
 
@@ -30,7 +30,7 @@ function* getPostById(action) {
     yield* apiSaga(
         postsService.byId,
         payload,
-        postsActions.storagePost
+        postsActions.addPostArrayItem
     );
 }
 
@@ -40,7 +40,7 @@ function* createPost(action) {
     yield* apiSaga(
         postsService.newPost,
         payload,
-        postsActions.storagePost,
+        postsActions.addPostArrayItem,
         'MESSAGES.POST_CREATE_SUCCESS'
     );
 }

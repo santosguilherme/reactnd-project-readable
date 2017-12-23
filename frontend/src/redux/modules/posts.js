@@ -8,10 +8,9 @@ import {updateItemInArray} from '../reducersUtils';
 /* Actions Types */
 const GET_ALL_POSTS_REQUEST = 'readable/posts/GET_ALL_POSTS_REQUEST';
 const GET_CATEGORY_POSTS_REQUEST = 'readable/posts/GET_CATEGORY_POSTS_REQUEST';
-//FIXME: mudar nome da action
-const GET_ALL_POSTS_SUCCESS = 'readable/posts/GET_ALL_POSTS_SUCCESS';
+const UPDATE_POSTS_ARRAY = 'readable/posts/UPDATE_POSTS_ARRAY';
 const GET_POST_REQUEST = 'readable/posts/GET_POST_REQUEST';
-const GET_POST_SUCCESS = 'readable/posts/GET_POST_SUCCESS';
+const ADD_POST_ARRAY_ITEM = 'readable/posts/ADD_POST_ARRAY_ITEM';
 const NEW_POST_REQUEST = 'readable/posts/NEW_POST_REQUEST';
 const POST_VOTE_UP = 'readable/posts/POST_VOTE_UP';
 const POST_VOTE_DOWN = 'readable/posts/POST_VOTE_DOWN';
@@ -23,9 +22,9 @@ const UPDATE_POST_REQUEST = 'readable/posts/UPDATE_POST_REQUEST';
 export const types = {
     GET_ALL_POSTS_REQUEST,
     GET_CATEGORY_POSTS_REQUEST,
-    GET_ALL_POSTS_SUCCESS,
+    UPDATE_POSTS_ARRAY,
     GET_POST_REQUEST,
-    GET_POST_SUCCESS,
+    ADD_POST_ARRAY_ITEM,
     NEW_POST_REQUEST,
     POST_VOTE_UP,
     POST_VOTE_DOWN,
@@ -38,9 +37,9 @@ export const types = {
 /* Actions */
 const getAllPosts = createAction(GET_ALL_POSTS_REQUEST);
 const getCategoryPosts = createAction(GET_CATEGORY_POSTS_REQUEST);
-const storagePosts = createAction(GET_ALL_POSTS_SUCCESS);
+const updatePostsArray = createAction(UPDATE_POSTS_ARRAY);
 const getPostById = createAction(GET_POST_REQUEST);
-const storagePost = createAction(GET_POST_SUCCESS);
+const addPostArrayItem = createAction(ADD_POST_ARRAY_ITEM);
 const saveNewPost = post => {
     return createAction(NEW_POST_REQUEST)({
         id: uuidv1(),
@@ -58,9 +57,9 @@ const updatePost = createAction(UPDATE_POST_REQUEST);
 export const actions = {
     getAllPosts,
     getCategoryPosts,
-    storagePosts,
+    updatePostsArray,
     getPostById,
-    storagePost,
+    addPostArrayItem,
     saveNewPost,
     voteUp,
     voteDown,
@@ -75,15 +74,15 @@ const initialState = [];
 
 /* Reducers */
 export default handleActions({
-    [GET_ALL_POSTS_SUCCESS]: (state, action) => ([
+    [UPDATE_POSTS_ARRAY]: (state, action) => ([
         ...action.payload
     ]),
-    [GET_POST_SUCCESS]: (state, action) => ([
+    [ADD_POST_ARRAY_ITEM]: (state, action) => ([
         ...state,
         action.payload
     ]),
     [UPDATE_POST_ARRAY_ITEM]: (state, action) => {
-        return updateItemInArray(state, action.payload.id, vote => action.payload);
+        return updateItemInArray(state, action.payload.id, () => action.payload);
     },
     [DELETE_POST_SUCCESS]: (state, action) => {
         return state.filter(post => post.id !== action.payload.id);
