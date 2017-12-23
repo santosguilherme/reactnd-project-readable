@@ -26,6 +26,10 @@ function AppNotifications({notifications}) {
     );
 }
 
+AppNotifications.defaultProps = {
+    notifications: []
+};
+
 AppNotifications.propTypes = {
     notifications: PropTypes.array
 };

@@ -22,7 +22,7 @@ export const registerAxiosInterceptors = () => {
             message = error.response.data.message;
         }
 
-        if (error.response.status === 404) {
+        if (!unknownError && error.response.status === 404) {
             message = getFormattedMessage('MESSAGES.HTTP_NOT_FOUND');
         }
 
