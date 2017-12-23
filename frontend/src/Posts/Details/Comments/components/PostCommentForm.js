@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import {compose} from 'redux';
 import {connect} from 'react-redux';
+
 import {Field, reduxForm} from 'redux-form';
 import {injectIntl, FormattedMessage} from 'react-intl';
 

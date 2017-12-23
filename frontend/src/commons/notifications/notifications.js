@@ -1,5 +1,6 @@
 import {error, success} from 'react-notification-system-redux';
 
+
 const position = 'tr';
 
 export const showErrorMessage = errorMessage => error({

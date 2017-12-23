@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import {compose} from 'redux';
+import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import {injectIntl, FormattedDate, FormattedMessage} from 'react-intl';
 
@@ -12,26 +14,23 @@ import Person from 'material-ui-icons/Person';
 import Today from 'material-ui-icons/Today';
 import Typography from 'material-ui/Typography';
 
-import {compose} from 'redux';
-import {connect} from 'react-redux';
-
-import AppBar from '../../commons/components/AppBar/AppBar';
 import {actions as postsActions, selectors as postsSelectors} from '../../redux/modules/posts';
+import {actions as commentsActions, selectors as commentsSelectors} from '../../redux/modules/comments';
+import {actions as categoriesActions, selectors as categoriesSelectors} from '../../redux/modules/categories';
 
+import withConfirm from '../../commons/components/Confirm/withConfirm';
+import AppBar from '../../commons/components/AppBar/AppBar';
+import FlexColumnCenter from '../../commons/components/FlexColumnCenter/FlexColumnCenter';
 import ThreeBoxDetails from '../../commons/components/ThreeBoxDetails/ThreeBoxDetails';
 import SpinNumber from '../../commons/components/SpinNumber/SpinNumber';
 import EditRemoveMenu from '../../commons/components/EditRemoveMenu/EditRemoveMenu';
 
-import PostPropType from '../PostPropType';
-
 import PostModal from '../components/PostModal';
 import PostCommentsList from './Comments/PostCommentsList';
-import {actions as commentsActions, selectors as commentsSelectors} from '../../redux/modules/comments';
-import {actions as categoriesActions, selectors as categoriesSelectors} from '../../redux/modules/categories';
-import FlexColumnCenter from '../../commons/components/FlexColumnCenter/FlexColumnCenter';
-import withConfirm from '../../commons/components/Confirm/withConfirm';
+import PostPropType from '../PostPropType';
 
 import './postDetails.css';
+
 
 class PostDetails extends Component {
     state = {

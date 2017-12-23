@@ -35,7 +35,6 @@ function AppBarWrapper(props) {
         title
     } = props;
 
-
     return (
         <AppBar
             position="static"

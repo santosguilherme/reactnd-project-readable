@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import {connect} from 'react-redux';
 
 import Notifications from 'react-notification-system-redux';
+
 
 function AppNotifications({notifications}) {
     const style = {
