@@ -77,7 +77,9 @@ OrderByFilter.defaultProps = {
 
 OrderByFilter.propTypes = {
     selected: PropTypes.oneOf(['voteScore', 'timestamp', 'author']),
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    /* intl */
+    intl: PropTypes.object.isRequired
 };
 
 export default injectIntl(OrderByFilter);

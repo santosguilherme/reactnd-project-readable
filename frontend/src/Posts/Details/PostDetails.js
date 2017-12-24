@@ -26,7 +26,9 @@ import SpinNumber from '../../commons/components/SpinNumber/SpinNumber';
 import EditRemoveMenu from '../../commons/components/EditRemoveMenu/EditRemoveMenu';
 
 import PostModal from '../components/PostModal';
-import PostCommentsList from './Comments/PostCommentsList';
+import PostCommentsList from './Comment/PostCommentList';
+import CommentPropType from './Comment/CommentPropType';
+import CategoryPropType from '../Category/CategoryPropType';
 import PostPropType from '../PostPropType';
 
 import './postDetails.css';
@@ -51,7 +53,6 @@ class PostDetails extends Component {
 
     getBackUrl() {
         const {match, location} = this.props;
-
         const {category} = match.params;
         const {state} = location;
 
@@ -67,13 +68,11 @@ class PostDetails extends Component {
 
     handleVoteUpClick = () => {
         const {voteUp, post} = this.props;
-
         voteUp(post);
     };
 
     handleVoteDownClick = () => {
         const {voteDown, post} = this.props;
-
         voteDown(post);
     };
 
@@ -279,15 +278,20 @@ PostDetails.defaultProps = {
 
 PostDetails.propTypes = {
     post: PostPropType,
-    comments: PropTypes.array,
-    categories: PropTypes.array,
+    comments: PropTypes.arrayOf(CommentPropType),
+    categories: PropTypes.arrayOf(CategoryPropType),
     /* actions */
     getPostById: PropTypes.func.isRequired,
+    updatePost: PropTypes.func.isRequired,
+    deletePost: PropTypes.func.isRequired,
     voteUp: PropTypes.func.isRequired,
     voteDown: PropTypes.func.isRequired,
+    getCommentsFromPost: PropTypes.func.isRequired,
+    getAllCategories: PropTypes.func.isRequired,
     /* router */
     history: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     /* confirm */
     confirm: PropTypes.func.isRequired,
     /* intl */

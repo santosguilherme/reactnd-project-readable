@@ -22,6 +22,7 @@ import PostModal from '../components/PostModal';
 import PostListItem from '../components/PostListItem';
 import If from '../../commons/components/If/If';
 
+import CategoryPropType from '../Category/CategoryPropType';
 import CategoryFilter from './CategoryFilter';
 import OrderByFilter from './OrderByFilter';
 import PostPropType from '../PostPropType';
@@ -213,10 +214,12 @@ PostList.propTypes = {
     posts: PropTypes.arrayOf(PostPropType),
     orderBy: PropTypes.string,
     category: PropTypes.string,
-    categories: PropTypes.array,
+    categories: PropTypes.arrayOf(CategoryPropType),
     /* actions */
     getAllPosts: PropTypes.func.isRequired,
     saveNewPost: PropTypes.func.isRequired,
+    updatePost: PropTypes.func.isRequired,
+    deletePost: PropTypes.func.isRequired,
     voteUp: PropTypes.func.isRequired,
     voteDown: PropTypes.func.isRequired,
     updatePostsFilter: PropTypes.func.isRequired,

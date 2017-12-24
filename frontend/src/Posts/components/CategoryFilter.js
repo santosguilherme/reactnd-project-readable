@@ -6,6 +6,8 @@ import {injectIntl} from 'react-intl';
 import List, {ListItem, ListItemText} from 'material-ui/List';
 import Menu, {MenuItem} from 'material-ui/Menu';
 
+import CategoryPropType from '../Category/CategoryPropType';
+
 
 class CategoryFilter extends Component {
     state = {
@@ -89,10 +91,7 @@ CategoryFilter.defaultProps = {
 CategoryFilter.propTypes = {
     selected: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    options: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        path: PropTypes.string.isRequired
-    })),
+    options: PropTypes.arrayOf(CategoryPropType),
     /* intl */
     intl: PropTypes.object.isRequired
 };

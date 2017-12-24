@@ -15,6 +15,8 @@ import FormattedDateTime from '../../../../commons/components/FormattedDateTime/
 import EditRemoveMenu from '../../../../commons/components/EditRemoveMenu/EditRemoveMenu';
 import SpinNumber from '../../../../commons/components/SpinNumber/SpinNumber';
 
+import CommentPropType from '../CommentPropType';
+
 import './postCommentListItem.css';
 
 
@@ -86,9 +88,8 @@ function PostCommentListItem(props) {
 
 PostCommentListItem.defaultProps = {};
 
-//TODO: comment propTypes
 PostCommentListItem.propTypes = {
-    comment: PropTypes.object.isRequired,
+    comment: CommentPropType.isRequired,
     onEditComment: PropTypes.func.isRequired,
     onRemoveComment: PropTypes.func.isRequired,
     onVoteDown: PropTypes.func.isRequired,

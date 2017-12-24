@@ -14,8 +14,9 @@ import {actions as commentsActions} from '../../../redux/modules/comments';
 import PostCommentListItem from './components/PostCommentListItem';
 import PostCommentModal from './components/PostCommentModal';
 import PostPropType from '../../PostPropType';
+import CommentPropType from './CommentPropType';
 
-import './postCommentsList.css';
+import './postCommentList.css';
 
 
 class PostCommentsList extends Component {
@@ -115,9 +116,13 @@ PostCommentsList.defaultProps = {
 
 PostCommentsList.propTypes = {
     post: PostPropType,
-    comments: PropTypes.array,
+    comments: PropTypes.arrayOf(CommentPropType),
     /* actions */
+    saveNewComment: PropTypes.func.isRequired,
+    updateComment: PropTypes.func.isRequired,
+    deleteComment: PropTypes.func.isRequired,
     voteUp: PropTypes.func.isRequired,
+    voteDown: PropTypes.func.isRequired,
     /* router */
     history: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,

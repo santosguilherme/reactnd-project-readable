@@ -13,7 +13,7 @@ import PostList from '../components/PostList';
 
 class CategoryPosts extends Component {
     componentDidMount() {
-        const {getCategoryPosts, updatePostsFilter, match, category} = this.props;
+        const {getCategoryPosts, updatePostsFilter, match, history, category} = this.props;
         const categoryParam = match.params.category;
 
         if (!category || category !== categoryParam) {
@@ -22,7 +22,7 @@ class CategoryPosts extends Component {
 
         getCategoryPosts(categoryParam);
 
-        this.unlisten = this.props.history.listen(location => {
+        this.unlisten = history.listen(location => {
             const {category} = location.state;
 
             category && getCategoryPosts(category);
@@ -39,12 +39,12 @@ class CategoryPosts extends Component {
 }
 
 CategoryPosts.propTypes = {
+    category: PropTypes.string,
     /* actions */
     getCategoryPosts: PropTypes.func.isRequired,
     updatePostsFilter: PropTypes.func.isRequired,
     /* router */
     history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired
 };
 

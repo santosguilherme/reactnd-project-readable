@@ -37,8 +37,8 @@ class EditRemoveMenu extends Component {
     };
 
     render() {
-        const {buttonProps} = this.props;
         const {anchorEl} = this.state;
+        const {buttonProps} = this.props;
         const open = Boolean(anchorEl);
 
         return (

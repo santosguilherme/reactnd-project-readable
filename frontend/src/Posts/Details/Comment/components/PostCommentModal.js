@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import {injectIntl} from 'react-intl';
 
 import ResponsiveDialog from '../../../../commons/components/ResponsiveDialog/ResponsiveDialog';
+
 import PostCommentForm from './PostCommentForm';
+import CommentPropType from '../CommentPropType';
 
 
 function PostCommentModal(props) {
@@ -44,7 +46,7 @@ PostCommentModal.defaultProps = {
 
 PostCommentModal.propTypes = {
     open: PropTypes.bool.isRequired,
-    comment: PropTypes.object,
+    comment: CommentPropType,
     title: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
     onSaveComment: PropTypes.func.isRequired,

@@ -5,6 +5,7 @@ import {injectIntl} from 'react-intl';
 
 import ResponsiveDialog from '../../commons/components/ResponsiveDialog/ResponsiveDialog';
 
+import CategoryPropType from '../Category/CategoryPropType';
 import PostForm from './PostForm';
 import PostPropType from '../PostPropType';
 
@@ -55,7 +56,7 @@ PostModal.propTypes = {
     title: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
     onSavePost: PropTypes.func.isRequired,
-    categories: PropTypes.array,
+    categories: PropTypes.arrayOf(CategoryPropType),
     /* intl */
     intl: PropTypes.object.isRequired
 };

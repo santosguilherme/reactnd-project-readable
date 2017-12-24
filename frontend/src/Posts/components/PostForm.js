@@ -12,6 +12,7 @@ import MenuItem from 'material-ui/Menu/MenuItem';
 import {DefaultTextField, DefaultSelectField} from '../../commons/redux-form/componentsRenderer';
 import createValidate from '../../commons/redux-form/validatorUtils';
 
+import CategoryPropType from '../Category/CategoryPropType';
 import PostPropType from '../PostPropType';
 
 
@@ -77,7 +78,7 @@ function PostForm({intl, handleSubmit, invalid, submitting, onCancel, categories
             </div>
         </form>
     );
-};
+}
 
 PostForm.defaultProps = {
     post: {},
@@ -86,7 +87,9 @@ PostForm.defaultProps = {
 
 PostForm.propTypes = {
     post: PostPropType,
-    categories: PropTypes.array.isRequired,
+    categories: PropTypes.arrayOf(CategoryPropType),
+    onCancel: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     /* intl */
     intl: PropTypes.object.isRequired
 };

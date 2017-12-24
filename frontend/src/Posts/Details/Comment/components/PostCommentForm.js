@@ -12,6 +12,8 @@ import Button from 'material-ui/Button';
 import {DefaultTextField} from '../../../../commons/redux-form/componentsRenderer';
 import createValidate from '../../../../commons/redux-form/validatorUtils';
 
+import CommentPropType from '../CommentPropType';
+
 
 function PostCommentForm({intl, handleSubmit, invalid, submitting, onCancel, comment}) {
     const isEdit = Boolean(comment.id);
@@ -57,7 +59,9 @@ PostCommentForm.defaultProps = {
 };
 
 PostCommentForm.propTypes = {
-    comment: PropTypes.object,
+    comment: CommentPropType,
+    onCancel: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     /* intl */
     intl: PropTypes.object.isRequired
 };

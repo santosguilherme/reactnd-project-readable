@@ -16,7 +16,9 @@ function FormattedDateTime({datetime, intl}) {
 }
 
 FormattedDateTime.propTypes = {
-    datetime: PropTypes.number.isRequired
+    datetime: PropTypes.number.isRequired,
+    /* intl */
+    intl: PropTypes.object.isRequired
 };
 
 export default injectIntl(FormattedDateTime);
