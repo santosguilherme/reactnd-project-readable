@@ -1,12 +1,8 @@
-.app-bar {
+.post-list {
 
-  &__container {
-
-  }
-
-  &__title {
-    flex: 1;
-    text-align: center;
-    margin-right: 48px;
+  &__add-button {
+    position: fixed !important; //material-ui fix
+    bottom: 10px;
+    right: 10px;
   }
 }

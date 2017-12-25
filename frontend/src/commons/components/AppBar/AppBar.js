@@ -1,58 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {withStyles} from 'material-ui/styles';
-
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 
+import './appBar.css';
 
-const styles = () => ({
-    appBar: {
-        display: 'flex'
-    },
-    title: {
-        flexGrow: 1
-    },
-    rightButtonContent: {
-        width: '48px',
-        marginRight: -12
-    },
-    rightButton: {},
-    leftButtonContent: {
-        width: '48px',
-        marginLeft: -12
-    },
-    leftButton: {}
-});
 
 function AppBarWrapper(props) {
-    const {
-        classes,
-        leftButton,
-        rightButton,
-        title
-    } = props;
+    const {leftButton, rightButton, title} = props;
 
     return (
         <AppBar
             position="static"
-            className={classes.appBar}
+            className="app-bar"
         >
             <Toolbar>
-                <div className={classes.leftButtonContent}>
+                <div className="app-bar__right-content">
                     {leftButton && (leftButton)}
                 </div>
                 <Typography
                     type="title"
                     color="inherit"
-                    className={`${classes.title} text-uppercase`}
+                    className="app-bar__title"
                     align="center"
                 >
                     {title}
                 </Typography>
-                <div className={classes.rightButtonContent}>
+                <div className="app-bar__left-content">
                     {rightButton && (rightButton)}
                 </div>
             </Toolbar>
@@ -70,4 +46,4 @@ AppBarWrapper.propTypes = {
     title: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(AppBarWrapper);
+export default AppBarWrapper;

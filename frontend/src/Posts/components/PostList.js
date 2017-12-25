@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {withRouter} from 'react-router';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {withStyles} from 'material-ui/styles';
 import {injectIntl, FormattedMessage} from 'react-intl';
 
 import {Grid, Row, Col} from 'react-flexbox-grid';
@@ -136,14 +135,14 @@ class PostList extends Component {
 
     render() {
         const {postModalOpen, selectedPost} = this.state;
-        const {intl, classes, posts, categories, orderBy, category} = this.props;
+        const {intl, posts, categories, orderBy, category} = this.props;
         const colProps = {xs: 12, sm: 8, md: 6, lg: 4};
         const appBarTitle = intl.formatMessage({id: 'LABELS.APP_BAR_POST_LIST'}, {
             category: category || intl.formatMessage({id: 'LABELS.ALL_POSTS'})
         });
 
         return (
-            <div>
+            <div className="post-list">
                 <AppBar title={appBarTitle}/>
                 <Grid fluid>
                     <Row center="xs">
@@ -188,7 +187,7 @@ class PostList extends Component {
                 <Button
                     fab
                     color="primary"
-                    className={classes.addButton}
+                    className="post-list__add-button"
                     onClick={this.handleNewPost}
                 >
                     <AddIcon/>
@@ -250,6 +249,5 @@ const mapDispatchToProps = {
 export default compose(
     withRouter,
     connect(mapStateToProps, mapDispatchToProps),
-    withStyles(styles),
     injectIntl
 )(PostList);
