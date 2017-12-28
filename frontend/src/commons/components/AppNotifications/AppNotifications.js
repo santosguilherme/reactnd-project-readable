@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import Notifications from 'react-notification-system-redux';
 
 
-function AppNotifications({notifications}) {
+export function AppNotifications({notifications}) {
     const style = {
         NotificationItem: {
             DefaultStyle: {

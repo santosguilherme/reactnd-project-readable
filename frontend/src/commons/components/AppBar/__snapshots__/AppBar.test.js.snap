@@ -1,0 +1,515 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render left and right buttons 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AppBarWrapper
+    leftButton={
+      <button>
+        Left
+      </button>
+    }
+    rightButton={
+      <button>
+        Right
+      </button>
+    }
+    title="render buttons"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": <withStyles(Toolbar)>
+        <div
+          className="app-bar__right-content"
+        >
+          <button>
+            Left
+          </button>
+        </div>
+        <withStyles(Typography)
+          align="center"
+          className="app-bar__title"
+          color="inherit"
+          type="title"
+        >
+          render buttons
+        </withStyles(Typography)>
+        <div
+          className="app-bar__left-content"
+        >
+          <button>
+            Right
+          </button>
+        </div>
+      </withStyles(Toolbar)>,
+      "className": "app-bar",
+      "position": "static",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <div
+            className="app-bar__right-content"
+          >
+            <button>
+              Left
+            </button>
+          </div>,
+          <withStyles(Typography)
+            align="center"
+            className="app-bar__title"
+            color="inherit"
+            type="title"
+          >
+            render buttons
+          </withStyles(Typography)>,
+          <div
+            className="app-bar__left-content"
+          >
+            <button>
+              Right
+            </button>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <button>
+              Left
+            </button>,
+            "className": "app-bar__right-content",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Left",
+            },
+            "ref": null,
+            "rendered": "Left",
+            "type": "button",
+          },
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "align": "center",
+            "children": "render buttons",
+            "className": "app-bar__title",
+            "color": "inherit",
+            "type": "title",
+          },
+          "ref": null,
+          "rendered": "render buttons",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <button>
+              Right
+            </button>,
+            "className": "app-bar__left-content",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Right",
+            },
+            "ref": null,
+            "rendered": "Right",
+            "type": "button",
+          },
+          "type": "div",
+        },
+      ],
+      "type": [Function],
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": <withStyles(Toolbar)>
+          <div
+            className="app-bar__right-content"
+          >
+            <button>
+              Left
+            </button>
+          </div>
+          <withStyles(Typography)
+            align="center"
+            className="app-bar__title"
+            color="inherit"
+            type="title"
+          >
+            render buttons
+          </withStyles(Typography)>
+          <div
+            className="app-bar__left-content"
+          >
+            <button>
+              Right
+            </button>
+          </div>
+        </withStyles(Toolbar)>,
+        "className": "app-bar",
+        "position": "static",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <div
+              className="app-bar__right-content"
+            >
+              <button>
+                Left
+              </button>
+            </div>,
+            <withStyles(Typography)
+              align="center"
+              className="app-bar__title"
+              color="inherit"
+              type="title"
+            >
+              render buttons
+            </withStyles(Typography)>,
+            <div
+              className="app-bar__left-content"
+            >
+              <button>
+                Right
+              </button>
+            </div>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <button>
+                Left
+              </button>,
+              "className": "app-bar__right-content",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Left",
+              },
+              "ref": null,
+              "rendered": "Left",
+              "type": "button",
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "align": "center",
+              "children": "render buttons",
+              "className": "app-bar__title",
+              "color": "inherit",
+              "type": "title",
+            },
+            "ref": null,
+            "rendered": "render buttons",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <button>
+                Right
+              </button>,
+              "className": "app-bar__left-content",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Right",
+              },
+              "ref": null,
+              "rendered": "Right",
+              "type": "button",
+            },
+            "type": "div",
+          },
+        ],
+        "type": [Function],
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`renders without crashing 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AppBarWrapper
+    title="test"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": <withStyles(Toolbar)>
+        <div
+          className="app-bar__right-content"
+        />
+        <withStyles(Typography)
+          align="center"
+          className="app-bar__title"
+          color="inherit"
+          type="title"
+        >
+          test
+        </withStyles(Typography)>
+        <div
+          className="app-bar__left-content"
+        />
+      </withStyles(Toolbar)>,
+      "className": "app-bar",
+      "position": "static",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <div
+            className="app-bar__right-content"
+          />,
+          <withStyles(Typography)
+            align="center"
+            className="app-bar__title"
+            color="inherit"
+            type="title"
+          >
+            test
+          </withStyles(Typography)>,
+          <div
+            className="app-bar__left-content"
+          />,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": undefined,
+            "className": "app-bar__right-content",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "align": "center",
+            "children": "test",
+            "className": "app-bar__title",
+            "color": "inherit",
+            "type": "title",
+          },
+          "ref": null,
+          "rendered": "test",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": undefined,
+            "className": "app-bar__left-content",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+      ],
+      "type": [Function],
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": <withStyles(Toolbar)>
+          <div
+            className="app-bar__right-content"
+          />
+          <withStyles(Typography)
+            align="center"
+            className="app-bar__title"
+            color="inherit"
+            type="title"
+          >
+            test
+          </withStyles(Typography)>
+          <div
+            className="app-bar__left-content"
+          />
+        </withStyles(Toolbar)>,
+        "className": "app-bar",
+        "position": "static",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <div
+              className="app-bar__right-content"
+            />,
+            <withStyles(Typography)
+              align="center"
+              className="app-bar__title"
+              color="inherit"
+              type="title"
+            >
+              test
+            </withStyles(Typography)>,
+            <div
+              className="app-bar__left-content"
+            />,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": undefined,
+              "className": "app-bar__right-content",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "align": "center",
+              "children": "test",
+              "className": "app-bar__title",
+              "color": "inherit",
+              "type": "title",
+            },
+            "ref": null,
+            "rendered": "test",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": undefined,
+              "className": "app-bar__left-content",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "div",
+          },
+        ],
+        "type": [Function],
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

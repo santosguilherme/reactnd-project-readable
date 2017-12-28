@@ -1,0 +1,456 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render AppLoading 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AppLoading
+    show={true}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": <div
+        className="app-loading"
+      >
+        <withStyles(CircularProgress) />
+        <withStyles(Typography)
+          align="center"
+          className="app-loading__message"
+          type="body2"
+        >
+          <FormattedMessage
+            id="MESSAGES.LOADING"
+            values={Object {}}
+          />
+        </withStyles(Typography)>
+      </div>,
+      "test": true,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <withStyles(CircularProgress) />,
+          <withStyles(Typography)
+            align="center"
+            className="app-loading__message"
+            type="body2"
+          >
+            <FormattedMessage
+              id="MESSAGES.LOADING"
+              values={Object {}}
+            />
+          </withStyles(Typography)>,
+        ],
+        "className": "app-loading",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "align": "center",
+            "children": <FormattedMessage
+              id="MESSAGES.LOADING"
+              values={Object {}}
+            />,
+            "className": "app-loading__message",
+            "type": "body2",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "id": "MESSAGES.LOADING",
+              "values": Object {},
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": <div
+          className="app-loading"
+        >
+          <withStyles(CircularProgress) />
+          <withStyles(Typography)
+            align="center"
+            className="app-loading__message"
+            type="body2"
+          >
+            <FormattedMessage
+              id="MESSAGES.LOADING"
+              values={Object {}}
+            />
+          </withStyles(Typography)>
+        </div>,
+        "test": true,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <withStyles(CircularProgress) />,
+            <withStyles(Typography)
+              align="center"
+              className="app-loading__message"
+              type="body2"
+            >
+              <FormattedMessage
+                id="MESSAGES.LOADING"
+                values={Object {}}
+              />
+            </withStyles(Typography)>,
+          ],
+          "className": "app-loading",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "align": "center",
+              "children": <FormattedMessage
+                id="MESSAGES.LOADING"
+                values={Object {}}
+              />,
+              "className": "app-loading__message",
+              "type": "body2",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "id": "MESSAGES.LOADING",
+                "values": Object {},
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`Test the AppLoading with connect() from react-redux 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Provider
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  >
+    <Connect(AppLoading) />
+  </Provider>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {},
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {},
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`renders without crashing 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AppLoading
+    show={false}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": <div
+        className="app-loading"
+      >
+        <withStyles(CircularProgress) />
+        <withStyles(Typography)
+          align="center"
+          className="app-loading__message"
+          type="body2"
+        >
+          <FormattedMessage
+            id="MESSAGES.LOADING"
+            values={Object {}}
+          />
+        </withStyles(Typography)>
+      </div>,
+      "test": false,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <withStyles(CircularProgress) />,
+          <withStyles(Typography)
+            align="center"
+            className="app-loading__message"
+            type="body2"
+          >
+            <FormattedMessage
+              id="MESSAGES.LOADING"
+              values={Object {}}
+            />
+          </withStyles(Typography)>,
+        ],
+        "className": "app-loading",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "align": "center",
+            "children": <FormattedMessage
+              id="MESSAGES.LOADING"
+              values={Object {}}
+            />,
+            "className": "app-loading__message",
+            "type": "body2",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "id": "MESSAGES.LOADING",
+              "values": Object {},
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": <div
+          className="app-loading"
+        >
+          <withStyles(CircularProgress) />
+          <withStyles(Typography)
+            align="center"
+            className="app-loading__message"
+            type="body2"
+          >
+            <FormattedMessage
+              id="MESSAGES.LOADING"
+              values={Object {}}
+            />
+          </withStyles(Typography)>
+        </div>,
+        "test": false,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <withStyles(CircularProgress) />,
+            <withStyles(Typography)
+              align="center"
+              className="app-loading__message"
+              type="body2"
+            >
+              <FormattedMessage
+                id="MESSAGES.LOADING"
+                values={Object {}}
+              />
+            </withStyles(Typography)>,
+          ],
+          "className": "app-loading",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "align": "center",
+              "children": <FormattedMessage
+                id="MESSAGES.LOADING"
+                values={Object {}}
+              />,
+              "className": "app-loading__message",
+              "type": "body2",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "id": "MESSAGES.LOADING",
+                "values": Object {},
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

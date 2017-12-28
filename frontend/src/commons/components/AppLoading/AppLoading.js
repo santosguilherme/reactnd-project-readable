@@ -15,7 +15,7 @@ import If from '../If/If';
 import './appLoading.css';
 
 
-function AppLoading({show}) {
+export function AppLoading({show}) {
     return (
         <If test={show}>
             <div className="app-loading">
