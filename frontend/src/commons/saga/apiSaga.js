@@ -5,8 +5,14 @@ import {actions as loadingActions} from '../../redux/modules/loading';
 import {showErrorMessage, showSuccessMessage} from '../notifications/notifications';
 import {getFormattedMessage} from '../i18n/intl';
 
+const defaultSettings = {
+    callSuccessFunction: false
+};
 
-export default function* apiSaga(fn, parameter, success, successMessageKey, failure, failureMessageKey) {
+export default function* apiSaga(fn, parameter, success, successMessageKey, failure, failureMessageKey, settings = {}) {
+    const config = {...defaultSettings, ...settings};
+    const {callSuccessFunction} = config;
+
     try {
         yield put(loadingActions.showLoading());
 
@@ -14,7 +20,7 @@ export default function* apiSaga(fn, parameter, success, successMessageKey, fail
         const data = response ? response.data : {};
 
         if (success) {
-            yield put(success(data));
+            yield (callSuccessFunction ? call(success, data) : put(success(data)));
         }
 
         yield delay(1000);

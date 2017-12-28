@@ -42,13 +42,13 @@ class PostDetails extends Component {
     componentDidMount() {
         const {match, getPostById, post, getCommentsFromPost, getAllCategories, categories} = this.props;
         const postLoaded = post && post.id;
-        const postId = post && post.id
+        const postId = postLoaded
             ? post.id
             : match.params.post;
 
-        !postLoaded && getPostById(postId);
-        postId && getCommentsFromPost(postId);
         !categories.length && getAllCategories();
+        !postLoaded && getPostById(postId);
+        getCommentsFromPost(postId);
     }
 
     getBackUrl() {
@@ -226,10 +226,14 @@ class PostDetails extends Component {
     render() {
         const {editModalOpen} = this.state;
         const {post, categories} = this.props;
-
-        if (!post) {
-            return null;
-        }
+        const rightButton = post && post.id
+            ? (<EditRemoveMenu
+                entity={post}
+                onEdit={this.handleEditPostClick}
+                onRemove={this.handleRemovePostClick}
+                buttonProps={{color: 'contrast'}}
+            />)
+            : null;
 
         return (
             <div>
@@ -243,14 +247,7 @@ class PostDetails extends Component {
                             <ArrowBack/>
                         </IconButton>
                     }
-                    rightButton={
-                        <EditRemoveMenu
-                            entity={post}
-                            onEdit={this.handleEditPostClick}
-                            onRemove={this.handleRemovePostClick}
-                            buttonProps={{color: 'contrast'}}
-                        />
-                    }
+                    rightButton={rightButton}
                 />
                 <Grid
                     fluid

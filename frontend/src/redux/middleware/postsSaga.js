@@ -1,9 +1,11 @@
-import {takeEvery} from 'redux-saga/effects';
+import {takeEvery, put} from 'redux-saga/effects';
 
 import {types as postsTypes, actions as postsActions} from '../modules/posts';
 
 import apiSaga from '../../commons/saga/apiSaga';
 import postsService from '../../commons/services/posts';
+import {getFormattedMessage} from '../../commons/i18n/intl';
+import {showErrorMessage} from '../../commons/notifications/notifications';
 
 
 function* getAllPosts() {
@@ -30,7 +32,16 @@ function* getPostById(action) {
     yield* apiSaga(
         postsService.byId,
         payload,
-        postsActions.addPostArrayItem
+        function* (data) {
+            yield put(data.id
+                ? postsActions.addPostArrayItem(data)
+                : showErrorMessage(getFormattedMessage('MESSAGES.POST_NOT_FOUND'))
+            );
+        },
+        null,
+        null,
+        null,
+        {callSuccessFunction: true}
     );
 }
 

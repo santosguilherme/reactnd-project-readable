@@ -60,6 +60,7 @@ export default {
             'POST_DELETE_SUCCESS': 'Post removido com sucesso!',
             'POST_VOTE_SUCCESS': 'Voto realizado com sucesso!',
             'POST_UPDATE_SUCCESS': 'Post atualizado com sucesso!',
+            'POST_NOT_FOUND': 'O post não foi encontrado ou já foi removido',
 
             'REQUIRED_FIELD': 'Campo obrigatório',
             'REMOVE_COMMENT_CONFIRM': 'Você confirma que deseja remover o comentário?',
