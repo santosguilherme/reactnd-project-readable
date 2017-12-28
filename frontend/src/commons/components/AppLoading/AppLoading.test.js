@@ -6,7 +6,7 @@ import {mountWithIntl} from '../../i18n/intl-enzyme-test-helper';
 
 import {Provider} from 'react-redux';
 
-import ConnecteAppLoading, {AppLoading} from './AppLoading';
+import ConnectedAppLoading, {AppLoading} from './AppLoading';
 
 
 it('renders without crashing', () => {
@@ -36,7 +36,7 @@ it('Test the AppLoading with connect() from react-redux', () => {
 
     const wrapper = shallow(
         <Provider store={store}>
-            <ConnecteAppLoading/>
+            <ConnectedAppLoading/>
         </Provider>
     );
 
