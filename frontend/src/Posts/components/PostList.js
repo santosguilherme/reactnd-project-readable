@@ -29,31 +29,6 @@ import PostPropType from '../PostPropType';
 import './postList.css';
 
 
-const styles = theme => ({
-    addButton: {
-        position: 'fixed',
-        bottom: '10px',
-        right: '10px'
-    },
-    filterContent: {
-        textAlign: 'center',
-        padding: '15px 0 10px'
-    },
-    filterButton: {
-        width: '100%'
-    },
-    card: {
-        marginTop: theme.spacing.unit,
-        marginBottom: theme.spacing.unit,
-        textAlign: 'left'
-    },
-    cardContent: {
-        paddingTop: '0',
-        paddingBottom: '0'
-    }
-});
-
-
 class PostList extends Component {
     state = {
         postModalOpen: false,
