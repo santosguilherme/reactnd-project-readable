@@ -8,7 +8,7 @@ import {actions as postsActions} from '../../redux/modules/posts';
 import PostList from '../components/PostList';
 
 
-class AllPosts extends Component {
+export class AllPosts extends Component {
     componentDidMount() {
         const {getAllPosts} = this.props;
         getAllPosts();
