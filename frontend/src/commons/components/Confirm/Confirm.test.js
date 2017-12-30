@@ -14,4 +14,3 @@ it('renders without crashing', () => {
 
     expect(wrapper).toMatchSnapshot();
 });
-//TODO: continuar os testes

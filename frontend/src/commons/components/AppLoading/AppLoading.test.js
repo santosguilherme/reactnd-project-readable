@@ -24,8 +24,8 @@ it('Should render AppLoading', () => {
 it('The rendered component must have the classes', () => {
     const test = mountWithIntl(<AppLoading show={true}/>);
 
-    expect(test.find('.app-loading')).toBeTruthy();
-    expect(test.find('.app-loading__message')).toBeTruthy();
+    expect(test.find('.app-loading').length).toBeTruthy();
+    expect(test.find('.app-loading__message').length).toBeTruthy();
 });
 
 it('Test the AppLoading with connect() from react-redux', () => {
